@@ -1,0 +1,22 @@
+.nav-container {
+    position: fixed;
+    display: flex;
+}
+
+.nav-container button {
+    color: white;
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    font-size: 2rem;
+    transition: all .2s;
+}
+
+.nav-container button[isvisible="true"] {
+    rotate: -90deg;
+}
