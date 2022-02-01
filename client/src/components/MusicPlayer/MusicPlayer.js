@@ -56,6 +56,7 @@ function MusicPlayer() {
     PlayingSong.audio.pause();
   }
 
+  // next and prev both toggle through the songs and loop when the arrray of songs finishes
   function NextSong() {
     PlayingSong.audio.pause();
     PlayingSong.audio.currentTime = 0;
@@ -78,7 +79,7 @@ function MusicPlayer() {
     });
   }
 
-
+  // timeControl changes song time depending on where the user clicks the bar
   function timeControl(clientX, offsetLeft, clientWidth) {
     const x = clientX - offsetLeft;
     const songTime = x / clientWidth;
@@ -99,6 +100,8 @@ function MusicPlayer() {
           onSetTime={timeControl}
           currentSong={PlayingSong}
         />
+        
+        {/* The three media buttons and toggle for play and pause */}
         <div className={classes["media-buttons"]}>
           <button onClick={PrevSong}>&#9198;</button>
           {isPlaying ? (

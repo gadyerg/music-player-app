@@ -4,6 +4,7 @@ import classes from "./TimeBar.module.css";
 function TimeBar(props) {
   const [time, setTime] = useState(0);
   
+  // updates the bar on time update and ads an event listener
   props.currentSong.audio.addEventListener("timeupdate", () => {
     setTime(props.currentSong.audio.currentTime);
     if (props.currentSong.audio.currentTime === props.currentSong.audio.duration) {
@@ -11,6 +12,7 @@ function TimeBar(props) {
     }
   });
 
+  // feeds the time bar info to the MusicPlayer Component
   function updateWhenClick(evt) {
     const clientX = evt.clientX;
     const offsetLeft = evt.target.offsetLeft;
