@@ -1,0 +1,27 @@
+.container {
+    transform: translateY(19rem);
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    margin: 0 auto;
+    color: black;
+    background-color: white;
+    padding: 0 .5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    border-radius: .5rem;
+}
+
+.container label {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.container input {
+    margin: 1rem 0;
+}
+
+.container button {
+    margin-top: 1rem;
+    width: 20%;
+}

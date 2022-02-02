@@ -1,20 +1,22 @@
 import React from "react";
+import classes from './Form.module.css';
 
 function Form() {
   return (
     <React.Fragment>
-      <form>
+      <form className={classes.container}>
         <label for="song-title">Song Title</label>
-        <input type="text" id="song-title" />
+        <input type="text" id="song-title" reauired />
         <label for="artist">Artist Name</label>
-        <input type="text" id="artist" />
-        <label for="album">Album/song cover</label>
+        <input type="text" id="artist" required />
+        <label for="album">Album/song cover (optional)</label>
         <input type='file' accept="image/*" id="album" />
         <label for='song'>Song file</label>
-        <input type='file' accept="audio/*" />
+        <input type='file' accept="audio/*" required />
+        <button>Add</button>
       </form>
     </React.Fragment>
   );
 }
 
-export default Form;
+export default Form; 
