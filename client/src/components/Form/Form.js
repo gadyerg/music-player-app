@@ -4,7 +4,7 @@ import classes from './Form.module.css';
 function Form() {
   return (
     <React.Fragment>
-      <form className={classes.container}>
+      <form className={classes.container} encType="multipart/form-data" method="post">
         <label for="song-title">Song Title</label>
         <input type="text" id="song-title" reauired />
         <label for="artist">Artist Name</label>
