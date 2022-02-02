@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import SongContext from "../../store/song-context";
 import classes from "./MusicPlayer.module.css";
 import TimeBar from "./TimeBar";
 import Kyoto from "../../music/Kyoto.mp3";
@@ -37,10 +38,12 @@ const SONG_LIST = [
 ];
 
 function MusicPlayer() {
+  const ctx = useContext(SongContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(0);
 
   const PlayingSong = SONG_LIST[currentSong];
+  ctx.song = PlayingSong;
 
   if (isPlaying) {
     PlayingSong.audio.play();
