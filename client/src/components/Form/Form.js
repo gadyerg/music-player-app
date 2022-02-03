@@ -11,15 +11,14 @@ function Form() {
         "Content-ype": "application/json",
       },
     };
-    const songInfo = {
-      title: evt.target[0].value,
-      artist: evt.target[1].value,
-      cover: evt.target[2].files[0],
-      song: evt.target[3].files[0],
-    };
-    console.log(songInfo)
+    const data = new FormData()
+    data.append('title', evt.target[0].value)
+    data.append('artist', evt.target[1].value)
+    data.append('cover', evt.target[2].files[0])
+    data.append('song', evt.target[3].files[0])
 
-    axios.post("http://localhost:5000/AddSong", songInfo, config);
+    console.log(data)
+    axios.post("http://localhost:5000/AddSong", data, config);
   }
 
   return (
