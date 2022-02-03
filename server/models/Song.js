@@ -8,6 +8,11 @@ const songSchema = new mongoose.Schema({
     artist: {
         type: String,
         required: true
+    },
+    cover: String,
+    song: {
+        type: String,
+        required: true
     }
 });
 
