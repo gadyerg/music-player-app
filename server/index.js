@@ -40,9 +40,13 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
     cover: req.files.cover[0].path,
     song: req.files.song[0].path
   }
+  if (!req.files.cover[0].mimetype.includes('image') || !req.files.song[0].mimetype.includes('audio')) {
+    throw new Error('not valid file type')
+  }
   const newSong = await new Song(info);
-  // Song.save();
-  console.log(newSong)
+  Song.save();
+
+  res.json(newSong)
 });
 
 app.listen(port, () => {
