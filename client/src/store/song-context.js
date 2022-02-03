@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SongContext = React.createContext({
-    song: new Audio()
+    song: null
 });
 
 export default SongContext;

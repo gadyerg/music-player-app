@@ -42,7 +42,7 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
   }
   const newSong = await new Song(info);
   // Song.save();
-  console.log(newSong);
+  res.json(newSong)
 });
 
 app.listen(port, () => {

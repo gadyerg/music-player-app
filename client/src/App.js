@@ -3,16 +3,8 @@ import Home from './pages/Home';
 import Nav from './components/UI/Nav';
 import AddSong from './pages/AddSong';
 import { Route, Routes } from 'react-router-dom'; 
-import axios from 'axios';
 
 function App() {
-  async function test() {
-    const data = await axios.get('http://localhost:5000/');
-    console.log(data.data)
-  }
-
-  test();
-
   return (
     <div>
       <Nav />
