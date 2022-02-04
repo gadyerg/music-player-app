@@ -17,7 +17,7 @@ function MusicPlayer() {
     async function getSongs() {
       const allSongs = await axios.get("http://localhost:5000/GetSongs");
       songList = allSongs.data;
-      setGotData(true)
+      setGotData(true);
     }
     getSongs();
   }, []);
@@ -45,7 +45,7 @@ function MusicPlayer() {
   async function NextSong() {
     song.currentTime = 0;
     setCurrentSong((prevState) => {
-      if (currentSong + 1 === songList.length) {
+      if (songList[prevState + 1] === undefined ){
         return 0;
       }
       return prevState + 1;
@@ -71,33 +71,37 @@ function MusicPlayer() {
 
   return (
     <div className={classes.player}>
-      <div className={classes["cover-pic"]}>
-        <img
-          src={`http://localhost:5000/${songList[currentSong].cover}`}
-          alt="song cover"
-        />
-        <p>
-          {`${songList[currentSong].title}`} -{" "}
-          {`${songList[currentSong].artist}`}
-        </p>
-        <TimeBar
-          playing={isPlaying}
-          onSongEnd={NextSong}
-          onSetTime={timeControl}
-          currentSong={song}
-        />
+      {!gotData ? (
+        <p>loading...</p>
+      ) : (
+        <div className={classes["cover-pic"]}>
+          <img
+            src={`http://localhost:5000/${songList[currentSong].cover}`}
+            alt="song cover"
+          />
+          <p>
+            {`${songList[currentSong].title}`} -{" "}
+            {`${songList[currentSong].artist}`}
+          </p>
+          <TimeBar
+            playing={isPlaying}
+            onSongEnd={NextSong}
+            onSetTime={timeControl}
+            currentSong={song}
+          />
 
-        {/* The three media buttons and toggle for play and pause */}
-        <div className={classes["media-buttons"]}>
-          <button onClick={PrevSong}>&#9198;</button>
-          {isPlaying ? (
-            <button onClick={Pause}>&#9208;</button>
-          ) : (
-            <button onClick={Play}>&#9654;</button>
-          )}
-          <button onClick={NextSong}>&#9197;</button>
+          {/* The three media buttons and toggle for play and pause */}
+          <div className={classes["media-buttons"]}>
+            <button onClick={PrevSong}>&#9198;</button>
+            {isPlaying ? (
+              <button onClick={Pause}>&#9208;</button>
+            ) : (
+              <button onClick={Play}>&#9654;</button>
+            )}
+            <button onClick={NextSong}>&#9197;</button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
