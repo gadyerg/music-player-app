@@ -45,7 +45,7 @@ function MusicPlayer() {
   async function NextSong() {
     song.currentTime = 0;
     setCurrentSong((prevState) => {
-      if (songList[prevState + 1] === undefined ){
+      if (songList[prevState + 1] === undefined) {
         return 0;
       }
       return prevState + 1;

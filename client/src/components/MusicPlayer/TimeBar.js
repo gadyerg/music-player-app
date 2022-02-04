@@ -1,15 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./TimeBar.module.css";
 
 function TimeBar(props) {
   const [time, setTime] = useState(0);
-  
+
   // updates the bar on time update and ads an event listener
-  props.currentSong.addEventListener("timeupdate", () => {
-    setTime(props.currentSong.currentTime);
-    if (props.currentSong.currentTime === props.currentSong.duration) {
-      props.onSongEnd();
-    }
+  useEffect(() => {
+    props.currentSong.addEventListener("timeupdate", () => {
+      if (props.currentSong.currentTime === props.currentSong.duration) {
+        props.onSongEnd();
+      }
+      setTime(props.currentSong.currentTime);
+    });
   });
 
   // feeds the time bar info to the MusicPlayer Component
