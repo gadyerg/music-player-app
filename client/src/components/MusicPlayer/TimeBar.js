@@ -5,9 +5,9 @@ function TimeBar(props) {
   const [time, setTime] = useState(0);
   
   // updates the bar on time update and ads an event listener
-  props.currentSong.audio.addEventListener("timeupdate", () => {
-    setTime(props.currentSong.audio.currentTime);
-    if (props.currentSong.audio.currentTime === props.currentSong.audio.duration) {
+  props.currentSong.addEventListener("timeupdate", () => {
+    setTime(props.currentSong.currentTime);
+    if (props.currentSong.currentTime === props.currentSong.duration) {
       props.onSongEnd();
     }
   });
@@ -18,14 +18,14 @@ function TimeBar(props) {
     const offsetLeft = evt.target.offsetLeft;
     const clientWidth = evt.target.clientWidth;
     props.onSetTime(clientX, offsetLeft, clientWidth);
-    setTime(props.song.currentTime);
+    setTime(props.currentSong.currentTime);
   }
 
   return (
     <div className={classes["bar-container"]} onClick={updateWhenClick}>
       <div
         className={classes["bar-fill"]}
-        style={{ width: `${(time / props.song.duration) * 100}%` }}
+        style={{ width: `${(time / props.currentSong.duration) * 100}%` }}
       ></div>
     </div>
   );

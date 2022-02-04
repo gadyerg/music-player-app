@@ -5,8 +5,8 @@ import Form from "../components/Form/Form";
 function AddSong() {
   const ctx = useContext(SongContext);
   if (ctx.song) {
-    ctx.song.audio.pause();
-    ctx.song.audio.currentTime = 0;
+    ctx.song.pause();
+    ctx.song.currentTime = 0;
   }
 
   return <Form />;

@@ -1,70 +1,49 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import SongContext from "../../store/song-context";
 import classes from "./MusicPlayer.module.css";
 import TimeBar from "./TimeBar";
-import Kyoto from "../../music/Kyoto.mp3";
-import Dilittante from "../../music/Dilettante.mp3";
-import LDA from "../../music/Little Dark Age.mp3";
-import PB from "../../music/Piano Black.mp3";
+import axios from "axios";
 
-const SONG_LIST = [
-  {
-    name: "Kyoto",
-    artist: "Phoebe Bridges",
-    cover:
-      "https://ourculturemag.com/wp-content/uploads/2020/08/333B7425-1-scaled.jpg",
-    audio: new Audio(Kyoto),
-  },
-  {
-    name: "Dilettante",
-    artist: "St. Vincent",
-    cover:
-      "https://64.media.tumblr.com/441c8c1769238d953c38936dc3839386/tumblr_inline_p7cyb5ij9O1ry2xr3_1280.jpg",
-    audio: new Audio(Dilittante),
-  },
-  {
-    name: "Little Dark Age",
-    artist: "MGMT",
-    cover:
-      "https://www.indiependent.co.uk/wp-content/uploads/2018/06/cby-dp.jpg",
-    audio: new Audio(LDA),
-  },
-  {
-    name: "Piano Black",
-    artist: "SEATBELTS",
-    cover: "https://m.media-amazon.com/images/I/41V6S7NGC6L.jpg",
-    audio: new Audio(PB),
-  },
-];
+let song = new Audio();
 
 function MusicPlayer() {
+  const [songList, setSongList] = useState([{}]);
   const ctx = useContext(SongContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(0);
 
-  const PlayingSong = SONG_LIST[currentSong];
-  ctx.song = PlayingSong;
+  useEffect(() => {
+    async function getSongs() {
+      const allSongs = await axios.get("http://localhost:5000/GetSongs");
+      setSongList(allSongs.data);
+    }
+    getSongs();
+  }, []);
+
+  if (song.src !== `http://localhost:5000/${songList[currentSong].song}`) {
+    song.src = `http://localhost:5000/${songList[currentSong].song}`;
+  }
+  ctx.song = song;
 
   if (isPlaying) {
-    PlayingSong.audio.play();
+    song.play();
   }
 
   function Play() {
     setIsPlaying(true);
-    PlayingSong.audio.play();
+    song.play();
   }
 
   function Pause() {
     setIsPlaying(false);
-    PlayingSong.audio.pause();
+    song.pause();
   }
 
   // next and prev both toggle through the songs and loop when the arrray of songs finishes
-  function NextSong() {
-    PlayingSong.audio.pause();
-    PlayingSong.audio.currentTime = 0;
+  async function NextSong() {
+    song.currentTime = 0;
     setCurrentSong((prevState) => {
-      if (currentSong + 1 === SONG_LIST.length) {
+      if (currentSong + 1 === songList.length) {
         return 0;
       }
       return prevState + 1;
@@ -72,11 +51,10 @@ function MusicPlayer() {
   }
 
   function PrevSong() {
-    PlayingSong.audio.pause();
-    PlayingSong.audio.currentTime = 0;
+    song.currentTime = 0;
     setCurrentSong((prevState) => {
       if (currentSong === 0) {
-        return SONG_LIST.length - 1;
+        return songList.length - 1;
       }
       return prevState - 1;
     });
@@ -86,24 +64,27 @@ function MusicPlayer() {
   function timeControl(clientX, offsetLeft, clientWidth) {
     const x = clientX - offsetLeft;
     const songTime = x / clientWidth;
-    PlayingSong.audio.currentTime = songTime * PlayingSong.audio.duration;
+    song.currentTime = songTime * song.duration;
   }
 
   return (
     <div className={classes.player}>
       <div className={classes["cover-pic"]}>
-        <img src={`${PlayingSong.cover}`} alt="song cover" />
+        <img
+          src={`http://localhost:5000/${songList[currentSong].cover}`}
+          alt="song cover"
+        />
         <p>
-          {PlayingSong.name} - {PlayingSong.artist}
+          {`${songList[currentSong].title}`} -{" "}
+          {`${songList[currentSong].artist}`}
         </p>
         <TimeBar
-          song={PlayingSong.audio}
           playing={isPlaying}
           onSongEnd={NextSong}
           onSetTime={timeControl}
-          currentSong={PlayingSong}
+          currentSong={song}
         />
-        
+
         {/* The three media buttons and toggle for play and pause */}
         <div className={classes["media-buttons"]}>
           <button onClick={PrevSong}>&#9198;</button>
