@@ -71,37 +71,39 @@ function MusicPlayer() {
 
   return (
     <div className={classes.player}>
-      {!gotData ? (
-        <p>loading...</p>
-      ) : (
-        <div className={classes["cover-pic"]}>
-          <img
-            src={`http://localhost:5000/${songList[currentSong].cover}`}
-            alt="song cover"
-          />
-          <p>
-            {`${songList[currentSong].title}`} -{" "}
-            {`${songList[currentSong].artist}`}
-          </p>
-          <TimeBar
-            playing={isPlaying}
-            onSongEnd={NextSong}
-            onSetTime={timeControl}
-            currentSong={song}
-          />
+      <div className={classes.box}>
+        {!gotData ? (
+          <p>loading...</p>
+        ) : (
+          <div className={classes["cover-pic"]}>
+            <img
+              src={`http://localhost:5000/${songList[currentSong].cover}`}
+              alt="song cover"
+            />
+            <p>
+              {`${songList[currentSong].title}`} -{" "}
+              {`${songList[currentSong].artist}`}
+            </p>
+            <TimeBar
+              playing={isPlaying}
+              onSongEnd={NextSong}
+              onSetTime={timeControl}
+              currentSong={song}
+            />
 
-          {/* The three media buttons and toggle for play and pause */}
-          <div className={classes["media-buttons"]}>
-            <button onClick={PrevSong}>&#9198;</button>
-            {isPlaying ? (
-              <button onClick={Pause}>&#9208;</button>
-            ) : (
-              <button onClick={Play}>&#9654;</button>
-            )}
-            <button onClick={NextSong}>&#9197;</button>
+            {/* The three media buttons and toggle for play and pause */}
+            <div className={classes["media-buttons"]}>
+              <button onClick={PrevSong}>&#9198;</button>
+              {isPlaying ? (
+                <button onClick={Pause}>&#9208;</button>
+              ) : (
+                <button onClick={Play}>&#9654;</button>
+              )}
+              <button onClick={NextSong}>&#9197;</button>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
