@@ -5,9 +5,10 @@ import TimeBar from "./TimeBar";
 import axios from "axios";
 
 let song = new Audio();
+let songList = [{}];
 
 function MusicPlayer() {
-  const [songList, setSongList] = useState([{}]);
+  const [gotData, setGotData] = useState(false);
   const ctx = useContext(SongContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(0);
@@ -15,7 +16,8 @@ function MusicPlayer() {
   useEffect(() => {
     async function getSongs() {
       const allSongs = await axios.get("http://localhost:5000/GetSongs");
-      setSongList(allSongs.data);
+      songList = allSongs.data;
+      setGotData(true)
     }
     getSongs();
   }, []);
