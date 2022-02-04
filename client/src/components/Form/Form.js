@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Form.module.css";
 import axios from "axios";
 
 function Form() {
+  const [image, setImage] = useState('');
+  const [songFile, setSongFile] = useState('')
+
   function onSubmitHandler(evt) {
     evt.preventDefault();
 
@@ -21,6 +24,14 @@ function Form() {
     axios.post("http://localhost:5000/AddSong", data, config);
   }
 
+  function onImageChange(evt) {
+    const selectedImage = URL.createObjectURL(evt.target.files[0])
+    setImage(selectedImage)
+  }
+  function onSongChange (evt) {
+    setSongFile(evt.target.files[0].name)
+  }
+
   return (
     <React.Fragment>
       <form
@@ -32,10 +43,12 @@ function Form() {
         <input type="text" id="title" required />
         <label htmlFor="artist">Artist Name</label>
         <input type="text" id="artist" required />
-        <label htmlFor="cover">Album/song cover (optional)</label>
-        <input type="file" accept="image/*" id="cover" />
-        <label htmlFor="song">Song file</label>
-        <input type="file" accept="audio/*" id="song" required />
+        <label htmlFor="cover" className={classes.filelabel} required>Cover Upload</label>
+        <input type="file" accept="image/*" id="cover" onChange={onImageChange}/>
+        <img src={image}/>
+        <label htmlFor="song" className={classes.filelabel}>Song Upload</label>
+        <input type="file" accept="audio/*" id="song" required onChange={onSongChange}/>
+        {songFile && <p>{songFile}</p>}
         <button>Add</button>
       </form>
     </React.Fragment>

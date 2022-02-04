@@ -85,7 +85,6 @@ function MusicPlayer() {
               {`${songList[currentSong].artist}`}
             </p>
             <TimeBar
-              playing={isPlaying}
               onSongEnd={NextSong}
               onSetTime={timeControl}
               currentSong={song}
