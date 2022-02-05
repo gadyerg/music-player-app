@@ -1,0 +1,26 @@
+.bar {
+    border-radius: .3rem;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 20%;
+    height: 2.5%;
+    border: 1px solid black;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+}
+
+.bar p {
+    text-align: center;
+    width: 10%;
+    margin: 0;
+}
+
+.bar input {
+    font-size: 1.1rem;
+    width: 90%;
+    height: 90%;
+    border: none;
+    background-color: inherit;
+}
