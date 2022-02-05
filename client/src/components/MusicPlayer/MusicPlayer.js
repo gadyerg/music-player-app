@@ -12,12 +12,18 @@ function MusicPlayer() {
   const ctx = useContext(SongContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentSong, setCurrentSong] = useState(0);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     async function getSongs() {
-      const allSongs = await axios.get("http://localhost:5000/GetSongs");
-      songList = allSongs.data;
-      setGotData(true);
+      try {
+        const allSongs = await axios.get("http://localhost:5000/GetSongs");
+        songList = allSongs.data;
+        setGotData(true)
+      } catch {
+        setError(true);
+        setGotData(true);
+      }
     }
     getSongs();
   }, []);
@@ -72,9 +78,8 @@ function MusicPlayer() {
   return (
     <div className={classes.player}>
       <div className={classes.box}>
-        {!gotData ? (
-          <p>loading...</p>
-        ) : (
+        {!gotData && <p>loading...</p>}
+        {gotData && !error && (
           <div className={classes["cover-pic"]}>
             <img
               src={`http://localhost:5000/${songList[currentSong].cover}`}
@@ -102,6 +107,7 @@ function MusicPlayer() {
             </div>
           </div>
         )}
+        {gotData && error && <p>There has been an error</p>}
       </div>
     </div>
   );
