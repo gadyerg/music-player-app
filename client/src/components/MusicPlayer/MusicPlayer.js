@@ -19,6 +19,7 @@ function MusicPlayer() {
       try {
         const allSongs = await axios.get("http://localhost:5000/GetSongs");
         songList = allSongs.data;
+        ctx.currentSongList = songList
         setGotData(true)
       } catch {
         setError(true);
@@ -26,12 +27,14 @@ function MusicPlayer() {
       }
     }
     getSongs();
-  }, []);
+  }, [ctx.currentSongList]);
 
+
+  // update song src on a different song
   if (song.src !== `http://localhost:5000/${songList[currentSong].song}`) {
     song.src = `http://localhost:5000/${songList[currentSong].song}`;
+    ctx.song = song;
   }
-  ctx.song = song;
 
   if (isPlaying) {
     song.play();
