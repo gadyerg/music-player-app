@@ -5,9 +5,9 @@ import { useContext } from "react";
 function SongPreview(props) {
     const ctx = useContext(SongContext)
 
-    function songClick(evt) {
-        const song = ctx.currentSongList.filter(el => el._id === props.id)
-        ctx.song = song[0]
+    function songClick() {
+        const songIndex = ctx.currentSongList.findIndex(el => el._id === props.id)
+        props.onSongClick(songIndex)
       }
 
   return (

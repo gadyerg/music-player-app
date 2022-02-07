@@ -7,11 +7,10 @@ import axios from "axios";
 let song = new Audio();
 let songList = [{}];
 
-function MusicPlayer() {
+function MusicPlayer(props) {
   const [gotData, setGotData] = useState(false);
   const ctx = useContext(SongContext);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(0);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -27,12 +26,12 @@ function MusicPlayer() {
       }
     }
     getSongs();
-  }, [ctx.currentSongList]);
+  }, [ctx]);
 
 
   // update song src on a different song
-  if (song.src !== `http://localhost:5000/${songList[currentSong].song}`) {
-    song.src = `http://localhost:5000/${songList[currentSong].song}`;
+  if (song.src !== `http://localhost:5000/${songList[props.currentSong].song}`) {
+    song.src = `http://localhost:5000/${songList[props.currentSong].song}`;
     ctx.song = song;
   }
 
@@ -53,7 +52,7 @@ function MusicPlayer() {
   // next and prev both toggle through the songs and loop when the arrray of songs finishes
   async function NextSong() {
     song.currentTime = 0;
-    setCurrentSong((prevState) => {
+    props.setCurrentSong((prevState) => {
       if (songList[prevState + 1] === undefined) {
         return 0;
       }
@@ -63,8 +62,8 @@ function MusicPlayer() {
 
   function PrevSong() {
     song.currentTime = 0;
-    setCurrentSong((prevState) => {
-      if (currentSong === 0) {
+    props.setCurrentSong((prevState) => {
+      if (props.currentSong === 0) {
         return songList.length - 1;
       }
       return prevState - 1;
@@ -85,12 +84,12 @@ function MusicPlayer() {
         {gotData && !error && (
           <div className={classes["cover-pic"]}>
             <img
-              src={`http://localhost:5000/${songList[currentSong].cover}`}
+              src={`http://localhost:5000/${songList[props.currentSong].cover}`}
               alt="song cover"
             />
             <p>
-              {`${songList[currentSong].title}`} -{" "}
-              {`${songList[currentSong].artist}`}
+              {`${songList[props.currentSong].title}`} -{" "}
+              {`${songList[props.currentSong].artist}`}
             </p>
             <TimeBar
               onSongEnd={NextSong}

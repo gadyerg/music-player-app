@@ -3,7 +3,7 @@ import SongContext from "../../store/song-context";
 import classes from "./SearchBar.module.css";
 import SongPreview from "./SongPreview";
 
-function SearchBar() {
+function SearchBar(props) {
   const ctx = useContext(SongContext);
   const [search, setSearch] = useState("");
 
@@ -18,6 +18,10 @@ function SearchBar() {
     setSearch(evt.target.value);
   }
 
+  function SongIndexHandler(index) {
+    props.passSongIndex(index)
+  }
+
   return (
     <div className={classes.previewnbar}>
       <div className={classes.bar}>
@@ -27,7 +31,7 @@ function SearchBar() {
       {search.length > 0 && (
         <div className={classes["mini-preview"]}>
           {searchFilter.map((el) => (
-            <SongPreview key={el._id} image={el.cover} songTitle={el.title} id={el._id}/>
+            <SongPreview key={el._id} image={el.cover} songTitle={el.title} id={el._id} onSongClick={SongIndexHandler}/>
           ))}
         </div>
       )}
