@@ -3,6 +3,8 @@ import SongContext from "../../store/song-context";
 import classes from "./MusicPlayer.module.css";
 import TimeBar from "./TimeBar";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { imageSpin } from "../../animations/animtions";
 
 let song = new Audio();
 let songList = [{}];
@@ -84,10 +86,23 @@ function MusicPlayer(props) {
         {!gotData && <p>loading...</p>}
         {gotData && !error && (
           <div className={classes["cover-pic"]}>
-            <img
-              src={`http://localhost:5000/${songList[props.currentSong].cover}`}
-              alt="song cover"
-            />
+            {isPlaying ? (
+              <motion.img
+                animate="spin"
+                variants={imageSpin}
+                src={`http://localhost:5000/${
+                  songList[props.currentSong].cover
+                }`}
+                alt="song cover"
+              />
+            ) : (
+              <img
+                src={`http://localhost:5000/${
+                  songList[props.currentSong].cover
+                }`}
+                alt="song cover"
+              />
+            )}
             <p>
               {`${songList[props.currentSong].title}`} -{" "}
               {`${songList[props.currentSong].artist}`}

@@ -17,3 +17,14 @@ export const menuSlide = {
         }
     }
 }
+
+export const imageSpin = {
+    spin: {
+        rotate: 360,
+        transition: {
+            ease: 'linear',
+            repeat: Infinity,
+            duration: 3
+        }
+    }
+}
