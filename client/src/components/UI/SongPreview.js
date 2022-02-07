@@ -3,12 +3,14 @@ import SongContext from "../../store/song-context";
 import { useContext } from "react";
 
 function SongPreview(props) {
-    const ctx = useContext(SongContext)
+  const ctx = useContext(SongContext);
 
-    function songClick() {
-        const songIndex = ctx.currentSongList.findIndex(el => el._id === props.id)
-        props.onSongClick(songIndex)
-      }
+  function songClick() {
+    const songIndex = ctx.currentSongList.findIndex(
+      (el) => el._id === props.id
+    );
+    props.onSongClick(songIndex);
+  }
 
   return (
     <div className={classes.preview} onClick={songClick}>

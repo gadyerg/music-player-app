@@ -18,8 +18,8 @@ function MusicPlayer(props) {
       try {
         const allSongs = await axios.get("http://localhost:5000/GetSongs");
         songList = allSongs.data;
-        ctx.currentSongList = songList
-        setGotData(true)
+        ctx.currentSongList = songList;
+        setGotData(true);
       } catch {
         setError(true);
         setGotData(true);
@@ -28,9 +28,10 @@ function MusicPlayer(props) {
     getSongs();
   }, [ctx]);
 
-
   // update song src on a different song
-  if (song.src !== `http://localhost:5000/${songList[props.currentSong].song}`) {
+  if (
+    song.src !== `http://localhost:5000/${songList[props.currentSong].song}`
+  ) {
     song.src = `http://localhost:5000/${songList[props.currentSong].song}`;
     ctx.song = song;
   }
