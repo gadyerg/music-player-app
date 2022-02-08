@@ -11,7 +11,7 @@ function SearchBar(props) {
     if (el.title) {
       return el.title.toLowerCase().startsWith(search.toLowerCase());
     }
-    return;
+    return undefined;
   });
 
   function getSearch(evt) {
