@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const port = 5000;
 const Song = require("./models/Song");
+const Playlist = require("./models/Playlist");
 
 const fields = [
   {
@@ -51,6 +52,11 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
   newSong.save();
 
   res.json(newSong);
+});
+
+app.post("/CreatePlaylist", async (req, res) => {
+  const newPlaylist = await new Playlist(req.body);
+  console.log(newPlaylist);
 });
 
 app.get("/GetSongs", async (req, res) => {

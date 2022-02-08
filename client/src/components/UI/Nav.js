@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import classes from "./Nav.module.css";
-import NavOptions from "./NavMenu";
+import NavMenu from "./NavMenu";
 import { AnimatePresence, motion } from "framer-motion";
 
-function Nav() {
+function Nav(props) {
   const [menuState, setMenuState] = useState(false);
 
   function toggleMenu() {
@@ -12,7 +12,7 @@ function Nav() {
 
   return (
     <div className={classes["nav-container"]}>
-      <AnimatePresence>{menuState && <NavOptions />}</AnimatePresence>
+      <AnimatePresence>{menuState && <NavMenu playlistPopUp={props.toggleCreatePlayList} />}</AnimatePresence>
       <motion.button
         isvisible={`${menuState}`}
         onClick={toggleMenu}
