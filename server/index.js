@@ -4,8 +4,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require("multer");
 const port = 5000;
-const Song = require("./models/Song");
-const Playlist = require("./models/Playlist");
+const Song = require("./models/song");
+const Playlist = require("./models/playlist");
 
 const fields = [
   {
