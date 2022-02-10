@@ -20,6 +20,7 @@ const fields = [
 
 app.use("/uploads", express.static("uploads"));
 app.use(cors());
+app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 const storage = multer.diskStorage({
@@ -51,12 +52,12 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
   const newSong = await new Song(info);
   newSong.save();
 
-  res.json(newSong);
+  res.end()
 });
 
 app.post("/CreatePlaylist", async (req, res) => {
   const newPlaylist = await new Playlist(req.body);
-  console.log(newPlaylist);
+  res.end()
 });
 
 app.get("/GetSongs", async (req, res) => {
