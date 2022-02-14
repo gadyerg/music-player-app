@@ -3,9 +3,11 @@ const app = express();
 const cors = require("cors");
 const mongoose = require("mongoose");
 const multer = require("multer");
+const bcrypt = require("bcrypt");
 const port = 5000;
 const Song = require("./models/song");
 const Playlist = require("./models/playlist");
+const User = require("./models/user");
 
 const fields = [
   {
@@ -20,7 +22,7 @@ const fields = [
 
 app.use("/uploads", express.static("uploads"));
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const storage = multer.diskStorage({
@@ -52,17 +54,27 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
   const newSong = await new Song(info);
   newSong.save();
 
-  res.end()
+  res.end();
 });
 
 app.post("/CreatePlaylist", async (req, res) => {
   const newPlaylist = await new Playlist(req.body);
-  res.end()
+  res.end();
 });
 
 app.get("/GetSongs", async (req, res) => {
   const allSongs = await Song.find();
   res.json(allSongs);
+});
+
+app.post("/SignUp", async (req, res) => {
+  const encryptedPassword = await bcrypt.hash(req.body.password, 12);
+  const newUser = await new User({
+    username: req.body.username,
+    password: encryptedPassword,
+  });
+  console.log(newUser);
+  res.json(newUser);
 });
 
 app.listen(port, () => {
