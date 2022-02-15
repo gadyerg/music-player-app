@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import Home from './pages/Home';
-import Nav from './components/UI/Nav';
-import CreatePlaylist from './components/CreatePlaylist/CreatePlaylist';
-import AddSong from './pages/AddSong';
-import { Route, Routes } from 'react-router-dom'; 
+import React, { useState } from "react";
+import Home from "./pages/Home";
+import Nav from "./components/UI/Nav";
+import CreatePlaylist from "./components/CreatePlaylist/CreatePlaylist";
+import AddSong from "./pages/AddSong";
+import SignUp from "./pages/SignUp";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const [createPlaylist, setCreatePlaylist] = useState(false);
@@ -11,13 +12,16 @@ function App() {
   return (
     <div>
       <Nav toggleCreatePlayList={setCreatePlaylist} />
-      {createPlaylist && <CreatePlaylist toggleCreatePlayList={setCreatePlaylist}/>}
+      {createPlaylist && (
+        <CreatePlaylist toggleCreatePlayList={setCreatePlaylist} />
+      )}
       <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/add-song' element={<AddSong />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/add-song" element={<AddSong />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
     </div>
-  )
+  );
 }
 
 export default App;

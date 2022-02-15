@@ -59,6 +59,7 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
 
 app.post("/CreatePlaylist", async (req, res) => {
   const newPlaylist = await new Playlist(req.body);
+  newPlaylist.save();
   res.end();
 });
 
@@ -73,8 +74,8 @@ app.post("/SignUp", async (req, res) => {
     username: req.body.username,
     password: encryptedPassword,
   });
-  console.log(newUser);
-  res.json(newUser);
+  newUser.save();
+  res.end();
 });
 
 app.listen(port, () => {
