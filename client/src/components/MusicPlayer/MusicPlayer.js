@@ -5,6 +5,10 @@ import TimeBar from "./TimeBar";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { imageSpin } from "../../animations/animtions";
+import play from "../../assets/play.svg";
+import pause from "../../assets/pause.svg";
+import forward from "../../assets/forward.svg";
+import backward from "../../assets/back.svg";
 
 let song = new Audio();
 let songList = [{}];
@@ -54,7 +58,6 @@ function MusicPlayer(props) {
 
   // next and prev both toggle through the songs and loop when the arrray of songs finishes
   async function NextSong() {
-    song.currentTime = 0;
     props.setCurrentSong((prevState) => {
       if (songList[prevState + 1] === undefined) {
         return 0;
@@ -64,7 +67,6 @@ function MusicPlayer(props) {
   }
 
   function PrevSong() {
-    song.currentTime = 0;
     props.setCurrentSong((prevState) => {
       if (props.currentSong === 0) {
         return songList.length - 1;
@@ -115,13 +117,13 @@ function MusicPlayer(props) {
 
             {/* The three media buttons and toggle for play and pause */}
             <div className={classes["media-buttons"]}>
-              <button onClick={PrevSong}>&#9198;</button>
+              <button onClick={PrevSong}><img src={backward} alt="back" /></button>
               {isPlaying ? (
-                <button onClick={Pause}>&#9208;</button>
+                <button onClick={Pause}><img src={pause} alt="pause" /></button>
               ) : (
-                <button onClick={Play}>&#9654;</button>
+                <button onClick={Play}><img src={play} alt="play" /></button>
               )}
-              <button onClick={NextSong}>&#9197;</button>
+              <button onClick={NextSong}><img src={forward} alt="next" /></button>
             </div>
           </div>
         )}

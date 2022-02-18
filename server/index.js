@@ -5,9 +5,9 @@ const mongoose = require("mongoose");
 const multer = require("multer");
 const bcrypt = require("bcrypt");
 const port = 5000;
-const Song = require("./models/song");
-const Playlist = require("./models/playlist");
-const User = require("./models/user");
+const Song = require("./models/Song");
+const Playlist = require("./models/Playlist");
+const User = require("./models/User");
 
 const fields = [
   {
