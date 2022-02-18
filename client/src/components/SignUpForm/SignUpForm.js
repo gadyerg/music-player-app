@@ -1,5 +1,6 @@
 import axios from "axios";
 import classes from "./SignUpForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
   function submitHandler(evt) {
@@ -10,7 +11,7 @@ function SignUpForm() {
     };
     try {
       axios.post("http://localhost:5000/SignUp", data);
-    } catch (error){
+    } catch (error) {
       console.log(error);
     }
   }

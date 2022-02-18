@@ -18,9 +18,11 @@ function NavMenu(props) {
       variants={menuSlide}
     >
       <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
+        {ctx.isLoggedIn && (
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+        )}
         {!ctx.isLoggedIn && (
           <li>
             <Link to="/signup">Sign Up</Link>

@@ -1,50 +1,50 @@
 .container {
-    transform: translateY(4rem);
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    margin: 0 auto;
-    color: black;
-    background-color: white;
-    padding: 0 .5rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    border-radius: .5rem;
+  transform: translateY(4rem);
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 0 auto;
+  color: black;
+  background-color: white;
+  padding: 0 0.5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  border-radius: 0.5rem;
 }
 
 .container img {
-    height: 20%;
-    width: 60%;
+  height: 20%;
+  width: 60%;
 }
 
 .container label {
-    font-weight: bold;
-    font-size: 1.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 .container input {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 .container input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .container button {
-    cursor: pointer;
-    margin-top: 1rem;
-    width: 20%;
-    border: none;
-    border-radius: .4rem;
-    font-size: 1.3rem;
-    background-color: rgb(66, 66, 228);
-    color: white;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 20%;
+  border: none;
+  border-radius: 0.4rem;
+  font-size: 1.3rem;
+  background-color: rgb(66, 66, 228);
+  color: white;
 }
 
 .filelabel {
-    text-align: center;
-    cursor: pointer;
-    border: 1px solid black;
-    margin: 1rem 0;
-    width: 50%;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid black;
+  margin: 1rem 0;
+  width: 50%;
 }

@@ -117,13 +117,21 @@ function MusicPlayer(props) {
 
             {/* The three media buttons and toggle for play and pause */}
             <div className={classes["media-buttons"]}>
-              <button onClick={PrevSong}><img src={backward} alt="back" /></button>
+              <button onClick={PrevSong}>
+                <img src={backward} alt="back" />
+              </button>
               {isPlaying ? (
-                <button onClick={Pause}><img src={pause} alt="pause" /></button>
+                <button onClick={Pause}>
+                  <img src={pause} alt="pause" />
+                </button>
               ) : (
-                <button onClick={Play}><img src={play} alt="play" /></button>
+                <button onClick={Play}>
+                  <img src={play} alt="play" />
+                </button>
               )}
-              <button onClick={NextSong}><img src={forward} alt="next" /></button>
+              <button onClick={NextSong}>
+                <img src={forward} alt="next" />
+              </button>
             </div>
           </div>
         )}

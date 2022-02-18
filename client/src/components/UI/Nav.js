@@ -12,11 +12,10 @@ function Nav(props) {
 
   return (
     <div className={classes["nav-container"]}>
-      <AnimatePresence>{menuState && <NavMenu playlistPopUp={props.toggleCreatePlayList} />}</AnimatePresence>
-      <motion.button
-        isvisible={`${menuState}`}
-        onClick={toggleMenu}
-      >
+      <AnimatePresence>
+        {menuState && <NavMenu playlistPopUp={props.toggleCreatePlayList} />}
+      </AnimatePresence>
+      <motion.button isvisible={`${menuState}`} onClick={toggleMenu}>
         &#8801;
       </motion.button>
     </div>

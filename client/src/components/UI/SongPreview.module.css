@@ -1,13 +1,13 @@
 .preview {
-    display: flex;
-    background-color: white;
-    align-items: center;
+  display: flex;
+  background-color: white;
+  align-items: center;
 }
 
 .preview img {
-    height: 5rem;
+  height: 5rem;
 }
 
 .preview p {
-    font-size: larger;
+  font-size: larger;
 }

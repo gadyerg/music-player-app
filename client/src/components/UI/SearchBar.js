@@ -24,10 +24,12 @@ function SearchBar(props) {
   }
 
   function onEnter(evt) {
-    if (evt.key === 'Enter' && searchFilter.length > 0) {
-      const index = ctx.currentSongList.findIndex(el => el._id === searchFilter[0]._id)
-      props.passSongIndex(index)
-      setSearch("")
+    if (evt.key === "Enter" && searchFilter.length > 0) {
+      const index = ctx.currentSongList.findIndex(
+        (el) => el._id === searchFilter[0]._id
+      );
+      props.passSongIndex(index);
+      setSearch("");
     }
   }
 
@@ -35,7 +37,12 @@ function SearchBar(props) {
     <div className={classes.previewnbar}>
       <div className={classes.bar}>
         <p>&#x1F50E;&#xFE0E;</p>
-        <input type="text" onChange={getSearch} value={search} onKeyPress={onEnter}/>
+        <input
+          type="text"
+          onChange={getSearch}
+          value={search}
+          onKeyPress={onEnter}
+        />
       </div>
       {search.length > 0 && (
         <div className={classes["mini-preview"]}>
