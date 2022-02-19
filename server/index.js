@@ -78,6 +78,12 @@ app.post("/SignUp", async (req, res) => {
   res.end();
 });
 
+app.post("/LogIn", async (req, res) => {
+  const currentUser = await User.findOne({ username: req.body.username });
+  const match = await bcrypt.compare(req.body.password, currentUser.password);
+  res.json({ matchResult: match, _id: currentUser._id });
+});
+
 app.listen(port, () => {
   console.log("listening...");
 });

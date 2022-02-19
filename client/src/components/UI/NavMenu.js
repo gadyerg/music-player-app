@@ -1,3 +1,4 @@
+import React from "react";
 import classes from "./NavMenu.module.css";
 import { motion } from "framer-motion";
 import { menuSlide } from "../../animations/animtions";
@@ -24,9 +25,14 @@ function NavMenu(props) {
           </li>
         )}
         {!ctx.isLoggedIn && (
-          <li>
-            <Link to="/signup">Sign Up</Link>
-          </li>
+          <React.Fragment>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+            <li>
+              <Link to="/login">Log In</Link>
+            </li>
+          </React.Fragment>
         )}
         {ctx.isLoggedIn && (
           <li>
