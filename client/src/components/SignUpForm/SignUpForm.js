@@ -6,14 +6,14 @@ import { useNavigate } from "react-router-dom";
 function SignUpForm() {
   const navigate = useNavigate();
 
-  function submitHandler(evt) {
+  async function submitHandler(evt) {
     evt.preventDefault();
     const data = {
       username: evt.target[0].value,
       password: evt.target[1].value,
     };
     try {
-      axios.post("http://localhost:5000/SignUp", data);
+      await axios.post("http://localhost:5000/SignUp", data);
       navigate("/login");
     } catch (error) {
       console.log(error);

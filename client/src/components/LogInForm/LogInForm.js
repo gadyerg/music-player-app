@@ -17,8 +17,7 @@ function LogInForm() {
     try {
       const match = await axios.post("http://localhost:5000/LogIn", data);
       if (match.data.matchResult) {
-        authCtx.isLoggedIn = true;
-        localStorage.setItem("id", match.data._id);
+        authCtx.onLogIn(match.data._id);
         navigate("/");
       }
     } catch {

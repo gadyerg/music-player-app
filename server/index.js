@@ -8,6 +8,7 @@ const port = 5000;
 const Song = require("./models/Song");
 const Playlist = require("./models/Playlist");
 const User = require("./models/User");
+const catchAsync = require("./utils/catchAsync");
 
 const fields = [
   {
@@ -68,7 +69,7 @@ app.get("/GetSongs", async (req, res) => {
   res.json(allSongs);
 });
 
-app.post("/SignUp", async (req, res) => {
+app.post("/SignUp", catchAsync(async (req, res) => {
   const encryptedPassword = await bcrypt.hash(req.body.password, 12);
   const newUser = await new User({
     username: req.body.username,
@@ -76,12 +77,16 @@ app.post("/SignUp", async (req, res) => {
   });
   newUser.save();
   res.end();
-});
+}));
 
-app.post("/LogIn", async (req, res) => {
+app.post("/LogIn", catchAsync(async (req, res) => {
   const currentUser = await User.findOne({ username: req.body.username });
   const match = await bcrypt.compare(req.body.password, currentUser.password);
   res.json({ matchResult: match, _id: currentUser._id });
+}));
+
+app.use((err, req, res, next) => {
+  console.log(err, "hello");
 });
 
 app.listen(port, () => {
