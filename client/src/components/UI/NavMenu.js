@@ -9,6 +9,10 @@ import { useContext } from "react";
 function NavMenu(props) {
   const ctx = useContext(AuthContext);
 
+  function logoutHandler() {
+    localStorage.clear();
+  }
+
   return (
     <motion.nav
       className={classes.nav}
@@ -20,9 +24,15 @@ function NavMenu(props) {
     >
       <ul>
         {ctx.isLoggedIn && (
-          <li>
-            <Link to="/">Home</Link>
-          </li>
+          <React.Fragment>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/add-song">Add Song</Link>
+            </li>
+            <li><button>Log Out</button></li>
+          </React.Fragment>
         )}
         {!ctx.isLoggedIn && (
           <React.Fragment>
@@ -33,11 +43,6 @@ function NavMenu(props) {
               <Link to="/login">Log In</Link>
             </li>
           </React.Fragment>
-        )}
-        {ctx.isLoggedIn && (
-          <li>
-            <Link to="/add-song">Add Song</Link>
-          </li>
         )}
       </ul>
     </motion.nav>

@@ -25,6 +25,12 @@
   text-decoration: none;
 }
 
+.nav button {
+  width: 100%;
+  font-size: 4.5rem;
+  cursor: pointer;
+}
+
 .popup {
   cursor: pointer;
 }

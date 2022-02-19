@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import SongContext from "../../store/song-context";
 import classes from "./SearchBar.module.css";
 import SongPreview from "./SongPreview";
+import magnifyingGlass from "../../assets/glass.svg";
 
 function SearchBar(props) {
   const ctx = useContext(SongContext);
@@ -36,7 +37,7 @@ function SearchBar(props) {
   return (
     <div className={classes.previewnbar}>
       <div className={classes.bar}>
-        <p>&#x1F50E;&#xFE0E;</p>
+       <img src={magnifyingGlass} alt="magnifying glass" />
         <input
           type="text"
           onChange={getSearch}
