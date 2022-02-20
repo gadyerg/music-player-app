@@ -41,6 +41,7 @@ mongoose
   .then(console.log("connected to mongodb"));
 
 app.post("/AddSong", upload.fields(fields), async (req, res) => {
+  const currentUser = await User.findById(req.body.id)
   const info = {
     ...req.body,
     cover: "uploads/" + req.files.cover[0].filename,
@@ -53,6 +54,9 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
     throw new Error("not valid file type");
   }
   const newSong = await new Song(info);
+  currentUser.songs.push(newSong);
+
+  currentUser.save();
   newSong.save();
 
   res.end();

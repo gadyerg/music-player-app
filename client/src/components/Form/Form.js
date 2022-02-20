@@ -22,6 +22,7 @@ function Form() {
     data.append("artist", evt.target[1].value);
     data.append("cover", evt.target[2].files[0]);
     data.append("song", evt.target[3].files[0]);
+    data.append("id", localStorage.getItem("id"));
 
     try {
       await axios.post("http://localhost:5000/AddSong", data, config);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -9,10 +9,12 @@ const AuthContext = React.createContext({
 export function AuthProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  if (localStorage.getItem("id")) {
-    setIsLoggedIn(true);
-  }
-
+  useEffect(() => {
+    if (localStorage.getItem("id") && !isLoggedIn) {
+      setIsLoggedIn(true);
+    }
+  }, [isLoggedIn]);
+ 
   function loginHandler(id) {
     setIsLoggedIn(true);
     localStorage.setItem("id", id);
