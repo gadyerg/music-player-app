@@ -27,7 +27,9 @@ function NavMenu(props) {
             <li>
               <Link to="/add-song">Add Song</Link>
             </li>
-            <li><button onClick={ctx.onLogOut}>Log Out</button></li>
+            <li>
+              <button onClick={ctx.onLogOut}>Log Out</button>
+            </li>
           </React.Fragment>
         )}
         {!ctx.isLoggedIn && (

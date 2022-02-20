@@ -9,7 +9,7 @@ function LogIn() {
     songCtx.song.pause();
     songCtx.song.currentTime = 0;
   }
-  
+
   return <LogInForm />;
 }
 

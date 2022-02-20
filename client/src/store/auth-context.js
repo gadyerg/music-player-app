@@ -14,7 +14,7 @@ export function AuthProvider(props) {
       setIsLoggedIn(true);
     }
   }, [isLoggedIn]);
- 
+
   function loginHandler(id) {
     setIsLoggedIn(true);
     localStorage.setItem("id", id);
@@ -26,10 +26,16 @@ export function AuthProvider(props) {
   }
 
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, onLogIn: loginHandler, onLogOut: logoutHandler}}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        onLogIn: loginHandler,
+        onLogOut: logoutHandler,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
-  )
+  );
 }
 
 export default AuthContext;

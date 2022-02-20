@@ -41,7 +41,7 @@ mongoose
   .then(console.log("connected to mongodb"));
 
 app.post("/AddSong", upload.fields(fields), async (req, res) => {
-  const currentUser = await User.findById(req.body.id)
+  const currentUser = await User.findById(req.body.id);
   const info = {
     ...req.body,
     cover: "uploads/" + req.files.cover[0].filename,
@@ -68,26 +68,34 @@ app.post("/CreatePlaylist", async (req, res) => {
   res.end();
 });
 
-app.get("/GetSongs", async (req, res) => {
-  const allSongs = await Song.find();
-  res.json(allSongs);
+app.post("/GetSongs", async (req, res) => {
+  const user = await User.findById(req.body.id);
+  await user.populate("songs");
+  const userSongs = user.songs;
+  res.json(userSongs);
 });
 
-app.post("/SignUp", catchAsync(async (req, res) => {
-  const encryptedPassword = await bcrypt.hash(req.body.password, 12);
-  const newUser = await new User({
-    username: req.body.username,
-    password: encryptedPassword,
-  });
-  newUser.save();
-  res.end();
-}));
+app.post(
+  "/SignUp",
+  catchAsync(async (req, res) => {
+    const encryptedPassword = await bcrypt.hash(req.body.password, 12);
+    const newUser = await new User({
+      username: req.body.username,
+      password: encryptedPassword,
+    });
+    newUser.save();
+    res.end();
+  })
+);
 
-app.post("/LogIn", catchAsync(async (req, res) => {
-  const currentUser = await User.findOne({ username: req.body.username });
-  const match = await bcrypt.compare(req.body.password, currentUser.password);
-  res.json({ matchResult: match, _id: currentUser._id });
-}));
+app.post(
+  "/LogIn",
+  catchAsync(async (req, res) => {
+    const currentUser = await User.findOne({ username: req.body.username });
+    const match = await bcrypt.compare(req.body.password, currentUser.password);
+    res.json({ matchResult: match, _id: currentUser._id });
+  })
+);
 
 app.use((err, req, res, next) => {
   console.log(err, "hello");

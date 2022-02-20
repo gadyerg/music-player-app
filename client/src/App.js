@@ -19,10 +19,22 @@ function App() {
         <CreatePlaylist toggleCreatePlayList={setCreatePlaylist} />
       )}
       <Routes>
-        <Route path="/" element={!authCtx.isLoggedIn ? <Navigate to="/login" /> : <Home />} />
-        <Route path="/add-song" element={authCtx.isLoggedIn ? <AddSong /> : <Navigate to ="/login" />} />
-        <Route path="/signup" element={authCtx.isLoggedIn ? <Navigate to="/" /> : <SignUp />} />
-        <Route path="/login" element={authCtx.isLoggedIn ? <Navigate to="/" /> : <LogIn />} />
+        <Route
+          path="/"
+          element={!authCtx.isLoggedIn ? <Navigate to="/login" /> : <Home />}
+        />
+        <Route
+          path="/add-song"
+          element={authCtx.isLoggedIn ? <AddSong /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/signup"
+          element={authCtx.isLoggedIn ? <Navigate to="/" /> : <SignUp />}
+        />
+        <Route
+          path="/login"
+          element={authCtx.isLoggedIn ? <Navigate to="/" /> : <LogIn />}
+        />
       </Routes>
     </div>
   );

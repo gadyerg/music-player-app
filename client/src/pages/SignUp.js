@@ -4,7 +4,7 @@ import SongContext from "../store/song-context";
 
 function SignUp() {
   const songCtx = useContext(SongContext);
-  
+
   if (songCtx.song) {
     songCtx.song.pause();
     songCtx.song.currentTime = 0;
