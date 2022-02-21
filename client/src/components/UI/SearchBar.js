@@ -9,7 +9,7 @@ function SearchBar(props) {
   const [search, setSearch] = useState("");
 
   const searchFilter = ctx.currentSongList.filter((el) => {
-    if (el.title) {
+    if (el.title && search.length > 0) {
       return el.title.toLowerCase().startsWith(search.toLowerCase());
     }
     return undefined;
@@ -26,6 +26,7 @@ function SearchBar(props) {
 
   function onEnter(evt) {
     if (evt.key === "Enter" && searchFilter.length > 0) {
+      console.log(searchFilter);
       const index = ctx.currentSongList.findIndex(
         (el) => el._id === searchFilter[0]._id
       );
