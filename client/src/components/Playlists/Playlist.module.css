@@ -1,0 +1,26 @@
+.info {
+  display: flex;
+  height: 5rem;
+  background-color: white;
+  align-items: center;
+  margin: .5rem 0;
+}
+
+p {
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.buttons {
+  display: flex;
+  margin-left: auto;
+}
+
+.buttons button {
+  margin-right: .3rem;
+  height: 2.5rem;
+  width: 4rem;
+  font-size: 1.2rem;
+}
+

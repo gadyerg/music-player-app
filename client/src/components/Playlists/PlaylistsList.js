@@ -2,6 +2,7 @@ import Playlist from "./Playlist.js";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import classes from "./PlaylistsList.module.css";
 
 function PlaylistsList() {
   const [popup, setPopup] = useState(false);
@@ -27,19 +28,20 @@ function PlaylistsList() {
   function onClosePopup() {
     setPopup(false);
   }
-  listOfPlaylists.map((playlist) => {
-    console.log(playlist);
-  })
+
   return (
     <React.Fragment>
       {popup && <CreatePlaylist close={onClosePopup} />}
-      <button onClick={addPlaylistHandler}>Add Playlist</button>
-        {listOfPlaylists.map((playlist) => {
-          <Playlist
-            name={playlist.name}
-            key={playlist._id}
-          />
-        })}
+      <div className={classes.list}>
+        <button onClick={addPlaylistHandler} className={classes.add}>Add Playlist</button>
+          {listOfPlaylists.map((playlist) => {
+            return <Playlist
+              name={playlist.name}
+              key={playlist._id}
+              id={playlist._id}
+            />
+          })}
+      </div>
     </React.Fragment>
   )
 }
