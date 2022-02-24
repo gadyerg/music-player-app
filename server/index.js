@@ -62,14 +62,25 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
   res.end();
 });
 
-app.post("/CreatePlaylist", async (req, res) => {
+app.post("/:id/CreatePlaylist", async (req, res) => {
+  const user = await User.findById(req.params.id);
   const newPlaylist = await new Playlist(req.body);
+  user.playlists.push(newPlaylist);
+  user.save();
   newPlaylist.save();
   res.end();
 });
 
-app.post("/GetSongs", async (req, res) => {
-  const user = await User.findById(req.body.id);
+app.get("/:id/GetPlaylists", async (req, res) => {
+  const user = await User.findById(req.params.id);
+  await user.populate("playlists");
+  const userPlaylists = user.playlists;
+  console.log(user);
+  res.json(userPlaylists);
+});
+
+app.get("/:id/GetSongs", async (req, res) => {
+  const user = await User.findById(req.params.id);
   await user.populate("songs");
   const userSongs = user.songs;
   res.json(userSongs);

@@ -5,6 +5,7 @@ import CreatePlaylist from "./components/CreatePlaylist/CreatePlaylist";
 import AddSong from "./pages/AddSong";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
+import Playlists from "./pages/Playlists";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AuthContext from "./store/auth-context";
 
@@ -34,6 +35,10 @@ function App() {
         <Route
           path="/login"
           element={authCtx.isLoggedIn ? <Navigate to="/" /> : <LogIn />}
+        />
+        <Route
+          path="/Playlists"
+          element={authCtx.isLoggedIn ? <Playlists /> : <LogIn />}
         />
       </Routes>
     </div>

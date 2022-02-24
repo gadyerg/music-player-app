@@ -28,6 +28,9 @@ function NavMenu(props) {
               <Link to="/add-song">Add Song</Link>
             </li>
             <li>
+              <Link to="/Playlists">Playlists</Link>
+            </li>
+            <li>
               <button onClick={ctx.onLogOut}>Log Out</button>
             </li>
           </React.Fragment>

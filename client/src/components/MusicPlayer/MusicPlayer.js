@@ -9,6 +9,7 @@ import play from "../../assets/play.svg";
 import pause from "../../assets/pause.svg";
 import forward from "../../assets/forward.svg";
 import backward from "../../assets/back.svg";
+import AuthContext from "../../store/auth-context";
 
 let song = new Audio();
 let songList = [{}];
@@ -16,14 +17,14 @@ let songList = [{}];
 function MusicPlayer(props) {
   const [gotData, setGotData] = useState(false);
   const ctx = useContext(SongContext);
+  const authCtx = useContext(AuthContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     async function getSongs() {
-      const data = { "id": localStorage.getItem("id") }
       try {
-        const allSongs = await axios.post("http://localhost:5000/GetSongs", data);
+        const allSongs = await axios.get(`http://localhost:5000/${localStorage.getItem("id")}/GetSongs`);
         songList = allSongs.data;
         ctx.currentSongList = songList;
         setGotData(true);
