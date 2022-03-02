@@ -38,6 +38,7 @@ function MusicPlayer(props) {
 
   // update song src on a different song
   if (
+    songList[0] !== undefined &&
     song.src !== `http://localhost:5000/${songList[props.currentSong].song}`
   ) {
     song.src = `http://localhost:5000/${songList[props.currentSong].song}`;
@@ -87,8 +88,9 @@ function MusicPlayer(props) {
   return (
     <div className={classes.player}>
       <div className={classes.box}>
+        {songList[0] === undefined && <p>No songs found.</p>}
         {!gotData && <p>loading...</p>}
-        {gotData && !error && (
+        {gotData && !error && songList[0] !== undefined && (
           <div className={classes["cover-pic"]}>
             {isPlaying ? (
               <motion.img

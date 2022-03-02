@@ -75,7 +75,6 @@ app.get("/:id/GetPlaylists", async (req, res) => {
   const user = await User.findById(req.params.id);
   await user.populate("playlists");
   const userPlaylists = user.playlists;
-  console.log(user);
   res.json(userPlaylists);
 });
 

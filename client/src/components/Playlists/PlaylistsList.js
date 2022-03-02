@@ -29,9 +29,14 @@ function PlaylistsList() {
     setPopup(false);
   }
 
+  async function updatePlaylistList() {
+    const updatedData = await axios.get(`http://localhost:500/${localStorage.getItem("id")}/GetPlaylists`);
+    setListOfPlaylists(updatedData);
+  }
+
   return (
     <React.Fragment>
-      {popup && <CreatePlaylist close={onClosePopup} />}
+      {popup && <CreatePlaylist close={onClosePopup} updateList={updatePlaylistList} />}
       <div className={classes.list}>
         <button onClick={addPlaylistHandler} className={classes.add}>Add Playlist</button>
           {listOfPlaylists.map((playlist) => {

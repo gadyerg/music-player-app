@@ -4,6 +4,7 @@
   background-color: white;
   align-items: center;
   margin: .5rem 0;
+  border-radius: .3rem;
 }
 
 p {
@@ -22,5 +23,16 @@ p {
   height: 2.5rem;
   width: 4rem;
   font-size: 1.2rem;
+  color: white;
+  border: none;
+  border-radius: .4rem;
+  cursor: pointer;
 }
 
+.edit {
+  background-color: #d66233;
+}
+
+.select {
+  background-color: #2cb84f;
+}

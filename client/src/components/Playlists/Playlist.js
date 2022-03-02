@@ -5,8 +5,8 @@ function Playlist(props){
     <div className={classes.info}>
       <p>{props.name}</p>
       <div className={classes.buttons}>
-        <button>Edit</button>
-        <button>Select</button>
+        <button className={classes.edit}>Edit</button>
+        <button className={classes.select}>Select</button>
       </div>
     </div>
   )

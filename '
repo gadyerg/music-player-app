@@ -7,8 +7,8 @@ function CreatePlaylist(props) {
     const data = { name: evt.target[0].value };
     try {
       await axios.post(`http://localhost:5000/${localStorage.getItem("id")}/CreatePlaylist`, data);
-      props.updateList();
       props.close();
+      props.updatePlaylists();
     } catch {
       console.log("Error");
     }
