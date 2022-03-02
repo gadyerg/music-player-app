@@ -56,6 +56,7 @@ function PlaylistsList() {
           return (
             <Playlist
               name={playlist.name}
+              thumbnail={playlist.thumbnail}
               key={playlist._id}
               id={playlist._id}
             />

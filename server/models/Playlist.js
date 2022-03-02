@@ -11,6 +11,11 @@ const playlistSchema = mongoose.Schema({
       ref: "Song",
     },
   ],
+  thumbnail: {
+    type: String,
+    required: true,
+    default: "uploads/musicnote.svg",
+  }
 });
 
 const Playlist = mongoose.model("Playlist", playlistSchema);
