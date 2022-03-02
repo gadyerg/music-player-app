@@ -1,6 +1,6 @@
 import classes from "./Playlist.module.css";
 
-function Playlist(props){
+function Playlist(props) {
   return (
     <div className={classes.info}>
       <p>{props.name}</p>
@@ -9,7 +9,7 @@ function Playlist(props){
         <button className={classes.select}>Select</button>
       </div>
     </div>
-  )
+  );
 }
 
 export default Playlist;

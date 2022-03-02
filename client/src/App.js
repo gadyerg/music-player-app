@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div>
-      <Nav /> 
+      <Nav />
       <Routes>
         <Route
           path="/"

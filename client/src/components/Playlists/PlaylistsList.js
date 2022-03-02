@@ -9,9 +9,11 @@ function PlaylistsList() {
   const [listOfPlaylists, setListOfPlaylists] = useState([]);
 
   useEffect(() => {
-    async function getPlaylists(){
+    async function getPlaylists() {
       try {
-        const playlistData = await axios.get(`http://localhost:5000/${localStorage.getItem("id")}/GetPlaylists`); 
+        const playlistData = await axios.get(
+          `http://localhost:5000/${localStorage.getItem("id")}/GetPlaylists`
+        );
         setListOfPlaylists(playlistData.data);
       } catch {
         console.log("error");
@@ -19,8 +21,8 @@ function PlaylistsList() {
     }
 
     getPlaylists();
-  }, [])
-  
+  }, []);
+
   function addPlaylistHandler() {
     setPopup(true);
   }
@@ -30,25 +32,38 @@ function PlaylistsList() {
   }
 
   async function updatePlaylistList() {
-    const updatedData = await axios.get(`http://localhost:500/${localStorage.getItem("id")}/GetPlaylists`);
-    setListOfPlaylists(updatedData);
+    const updatedData = await axios.get(
+      `http://localhost:5000/${localStorage.getItem("id")}/GetPlaylists`
+    );
+    setListOfPlaylists(updatedData.data);
   }
 
   return (
     <React.Fragment>
-      {popup && <CreatePlaylist close={onClosePopup} updateList={updatePlaylistList} />}
+      {popup && (
+        <CreatePlaylist close={onClosePopup} updateList={updatePlaylistList} />
+      )}
       <div className={classes.list}>
-        <button onClick={addPlaylistHandler} className={classes.add}>Add Playlist</button>
-          {listOfPlaylists.map((playlist) => {
-            return <Playlist
+        <button
+          onClick={addPlaylistHandler}
+          className={
+            listOfPlaylists.length === 0 ? classes.emptyadd : classes.add
+          }
+        >
+          Add Playlist
+        </button>
+        {listOfPlaylists.map((playlist) => {
+          return (
+            <Playlist
               name={playlist.name}
               key={playlist._id}
               id={playlist._id}
             />
-          })}
+          );
+        })}
       </div>
     </React.Fragment>
-  )
+  );
 }
 
 export default PlaylistsList;

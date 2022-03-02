@@ -10,8 +10,21 @@
   width: 15%;
   height: 2rem;
   border: none;
-  border-radius: .65rem;
+  border-radius: 0.65rem;
   background-color: rgb(221, 196, 148);
   font-size: 1.2rem;
   color: white;
+  cursor: pointer;
+}
+
+.emptyadd {
+  align-self: center;
+  width: 90%;
+  height: 2rem;
+  background-color: rgb(221, 196, 148);
+  font-size: 1.5rem;
+  color: white;
+  border: none;
+  transform: translateY(1rem);
+  cursor: pointer;
 }

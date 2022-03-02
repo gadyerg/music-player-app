@@ -24,7 +24,9 @@ function MusicPlayer(props) {
   useEffect(() => {
     async function getSongs() {
       try {
-        const allSongs = await axios.get(`http://localhost:5000/${localStorage.getItem("id")}/GetSongs`);
+        const allSongs = await axios.get(
+          `http://localhost:5000/${localStorage.getItem("id")}/GetSongs`
+        );
         songList = allSongs.data;
         ctx.currentSongList = songList;
         setGotData(true);
