@@ -9,6 +9,7 @@ const Song = require("./models/Song");
 const Playlist = require("./models/Playlist");
 const User = require("./models/User");
 const catchAsync = require("./utils/catchAsync");
+const session = require("express-session");
 
 const fields = [
   {
@@ -20,6 +21,18 @@ const fields = [
     maxCount: 1,
   },
 ];
+
+app.use(session({
+  secret: 'secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: null,
+    httpOnly: true,
+    sameSite: true,
+    secure: false,
+  },
+}))
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use(cors());
@@ -39,6 +52,11 @@ const upload = multer({ storage: storage });
 mongoose
   .connect("mongodb://localhost:27017/music-app")
   .then(console.log("connected to mongodb"));
+
+app.use((req, res, next) => {
+  console.log(req.session);
+  next();
+});
 
 app.post("/AddSong", upload.fields(fields), async (req, res) => {
   const currentUser = await User.findById(req.body.id);
@@ -103,12 +121,14 @@ app.post(
   catchAsync(async (req, res) => {
     const currentUser = await User.findOne({ username: req.body.username });
     const match = await bcrypt.compare(req.body.password, currentUser.password);
+    req.session.user = { id: currentUser._id, username: currentUser.username }
     res.json({ matchResult: match, _id: currentUser._id });
   })
 );
 
 app.use((err, req, res, next) => {
   console.log(err, "hello");
+  next();
 });
 
 app.listen(port, () => {
