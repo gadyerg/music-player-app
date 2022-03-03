@@ -11,8 +11,9 @@ function PlaylistsList() {
   useEffect(() => {
     async function getPlaylists() {
       try {
+        const userData = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
         const playlistData = await axios.get(
-          `http://localhost:5000/${localStorage.getItem("id")}/GetPlaylists`
+          `http://localhost:5000/${userData.data.user}/GetPlaylists`
         );
         setListOfPlaylists(playlistData.data);
       } catch {

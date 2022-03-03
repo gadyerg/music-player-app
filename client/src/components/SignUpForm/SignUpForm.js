@@ -1,10 +1,18 @@
-import React from "react";
+import React, {useEffect} from "react";
 import axios from "axios";
 import classes from "./SignUpForm.module.css";
 import { useNavigate } from "react-router-dom";
 
 function SignUpForm() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function data() {
+      const data = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
+      console.log(data.data);
+    }
+    data();
+  }, [])
 
   async function submitHandler(evt) {
     evt.preventDefault();

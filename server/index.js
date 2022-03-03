@@ -17,25 +17,22 @@ const fields = [
     maxCount: 1,
   },
   {
-    name: "cover",
-    maxCount: 1,
+    name: "cover", maxCount: 1,
   },
-];
-
+]; 
 app.use(session({
   secret: 'secret',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: null,
+    maxAge: 1000 * 60 * 60 * 24 * 365,
     httpOnly: true,
-    sameSite: true,
     secure: false,
   },
 }))
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use(cors());
+app.use(cors({credentials: true, origin: "http://localhost:3000", methods: ["GET", "POST"]}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -52,11 +49,6 @@ const upload = multer({ storage: storage });
 mongoose
   .connect("mongodb://localhost:27017/music-app")
   .then(console.log("connected to mongodb"));
-
-app.use((req, res, next) => {
-  console.log(req.session);
-  next();
-});
 
 app.post("/AddSong", upload.fields(fields), async (req, res) => {
   const currentUser = await User.findById(req.body.id);
@@ -121,10 +113,20 @@ app.post(
   catchAsync(async (req, res) => {
     const currentUser = await User.findOne({ username: req.body.username });
     const match = await bcrypt.compare(req.body.password, currentUser.password);
-    req.session.user = { id: currentUser._id, username: currentUser.username }
-    res.json({ matchResult: match, _id: currentUser._id });
+    if (match) {
+      req.session.user = currentUser._id;
+      req.session.save();
+      res.send(req.session);
+    }
   })
 );
+
+app.get("/AuthCheck", (req, res) => {
+  if (req.session.user) {
+    return res.json(req.session);
+  }
+  res.json(req.session);
+});
 
 app.use((err, req, res, next) => {
   console.log(err, "hello");

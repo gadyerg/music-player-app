@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -9,15 +10,15 @@ const AuthContext = React.createContext({
 export function AuthProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (localStorage.getItem("id") && !isLoggedIn) {
+  useEffect(async () => {
+    const authCheck = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
+    if (authCheck.data.user) {
       setIsLoggedIn(true);
     }
   }, [isLoggedIn]);
 
-  function loginHandler(id) {
+  function loginHandler() {
     setIsLoggedIn(true);
-    localStorage.setItem("id", id);
   }
 
   function logoutHandler() {

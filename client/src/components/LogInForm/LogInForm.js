@@ -15,9 +15,9 @@ function LogInForm() {
       password: evt.target[1].value,
     };
     try {
-      const match = await axios.post("http://localhost:5000/LogIn", data);
-      if (match.data.matchResult) {
-        authCtx.onLogIn(match.data._id);
+      const match = await axios.post("http://localhost:5000/LogIn", data, {withCredentials: true});
+      if (match.data.user) {
+        authCtx.onLogIn();
         navigate("/");
       }
     } catch {
