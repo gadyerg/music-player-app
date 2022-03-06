@@ -32,7 +32,7 @@ app.use(session({
 }))
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
-app.use(cors({credentials: true, origin: "http://localhost:3000", methods: ["GET", "POST"]}));
+app.use(cors({credentials: true, origin: "http://localhost:3000", methods: ["GET", "POST", "DELETE"]}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 mongoose
-  .connect("mongodb://localhost:27017/music-app")
+  .connect("mongodb://127.0.0.1/music-app")
   .then(console.log("connected to mongodb"));
 
 app.post("/AddSong", upload.fields(fields), async (req, res) => {
@@ -104,7 +104,7 @@ app.post(
       password: encryptedPassword,
     });
     newUser.save();
-    res.end();
+    res.json("ok")
   })
 );
 
@@ -120,6 +120,13 @@ app.post(
     }
   })
 );
+
+app.get(
+  "/SignOut",
+  (req, res) => {
+    req.session.destroy();
+    res.json("session ended");
+});
 
 app.get("/AuthCheck", (req, res) => {
   if (req.session.user) {

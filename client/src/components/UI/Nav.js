@@ -12,7 +12,7 @@ function Nav() {
 
   return (
     <div className={classes["nav-container"]}>
-      <AnimatePresence>{menuState && <NavMenu />}</AnimatePresence>
+      <AnimatePresence>{menuState && <NavMenu close={toggleMenu}/>}</AnimatePresence>
       <motion.button isvisible={`${menuState}`} onClick={toggleMenu}>
         &#8801;
       </motion.button>

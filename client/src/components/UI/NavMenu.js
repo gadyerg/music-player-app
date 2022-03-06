@@ -8,6 +8,12 @@ import { useContext } from "react";
 
 function NavMenu(props) {
   const ctx = useContext(AuthContext);
+  
+  async function logOut() {
+    await ctx.onLogOut();
+    props.close();
+  }
+
 
   return (
     <motion.nav
@@ -21,17 +27,17 @@ function NavMenu(props) {
       <ul>
         {ctx.isLoggedIn && (
           <React.Fragment>
-            <li>
+            <li onClick={props.close}>
               <Link to="/">Home</Link>
             </li>
-            <li>
+            <li onClick={props.close}>
               <Link to="/add-song">Add Song</Link>
             </li>
-            <li>
+            <li onClick={props.close}>
               <Link to="/Playlists">Playlists</Link>
             </li>
             <li>
-              <button onClick={ctx.onLogOut}>Log Out</button>
+              <button onClick={logOut}>Log Out</button>
             </li>
           </React.Fragment>
         )}

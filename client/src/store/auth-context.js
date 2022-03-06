@@ -10,23 +10,25 @@ const AuthContext = React.createContext({
 export function AuthProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(async () => {
-    const authCheck = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
-    if (authCheck.data.user) {
-      setIsLoggedIn(true);
+  useEffect(() => {
+    async function checkAuth() {
+      const authCheck = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
+      if (authCheck.data.user) {
+        setIsLoggedIn(true);
+      }
     }
+
+    checkAuth();
   }, [isLoggedIn]);
 
   function loginHandler() {
     setIsLoggedIn(true);
   }
 
-  function logoutHandler() {
+  async function logoutHandler() {
+    await axios.get("http://localhost:5000/SignOut", {withCredentials: true});
     setIsLoggedIn(false);
-    localStorage.removeItem("id");
-  }
-
-  return (
+  } return (
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
