@@ -5,15 +5,18 @@ const AuthContext = React.createContext({
   isLoggedIn: false,
   onLogIn: () => {},
   onLogOut: () => {},
+  user: {},
 });
 
 export function AuthProvider(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     async function checkAuth() {
       const authCheck = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
-      if (authCheck.data.user) {
+      if (authCheck.data.id) {
+        setUser(authCheck.data);
         setIsLoggedIn(true);
       }
     }
@@ -21,19 +24,23 @@ export function AuthProvider(props) {
     checkAuth();
   }, [isLoggedIn]);
 
-  function loginHandler() {
+  function loginHandler(data) {
+    setUser(data);
     setIsLoggedIn(true);
   }
 
   async function logoutHandler() {
     await axios.get("http://localhost:5000/SignOut", {withCredentials: true});
     setIsLoggedIn(false);
-  } return (
+  } 
+
+  return (
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
         onLogIn: loginHandler,
         onLogOut: logoutHandler,
+        user: user,
       }}
     >
       {props.children}

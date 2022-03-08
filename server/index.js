@@ -10,6 +10,7 @@ const Playlist = require("./models/Playlist");
 const User = require("./models/User");
 const catchAsync = require("./utils/catchAsync");
 const session = require("express-session");
+const middleware = require("./middleware");
 
 const fields = [
   {
@@ -50,13 +51,12 @@ mongoose
   .connect("mongodb://127.0.0.1/music-app")
   .then(console.log("connected to mongodb"));
 
-app.post("/AddSong", upload.fields(fields), async (req, res) => {
+app.post("/AddSong", upload.fields(fields), middleware.checkLogIn, async (req, res) => {
   const currentUser = await User.findById(req.body.id);
   const info = {
     ...req.body,
     cover: "uploads/" + req.files.cover[0].filename,
-    song: "uploads/" + req.files.song[0].filename,
-  };
+    song: "uploads/" + req.files.song[0].filename, };
   if (
     !req.files.cover[0].mimetype.includes("image") ||
     !req.files.song[0].mimetype.includes("audio")
@@ -72,7 +72,7 @@ app.post("/AddSong", upload.fields(fields), async (req, res) => {
   res.end();
 });
 
-app.post("/:id/CreatePlaylist", async (req, res) => {
+app.post("/:id/CreatePlaylist", middleware.checkLogIn, async (req, res) => {
   const user = await User.findById(req.params.id);
   const newPlaylist = await new Playlist(req.body);
   user.playlists.push(newPlaylist);
@@ -81,14 +81,14 @@ app.post("/:id/CreatePlaylist", async (req, res) => {
   res.end();
 });
 
-app.get("/:id/GetPlaylists", async (req, res) => {
+app.get("/:id/GetPlaylists", middleware.checkLogIn, async (req, res) => {
   const user = await User.findById(req.params.id);
   await user.populate("playlists");
   const userPlaylists = user.playlists;
   res.json(userPlaylists);
 });
 
-app.get("/:id/GetSongs", async (req, res) => {
+app.get("/:id/GetSongs", middleware.checkLogIn, async (req, res) => {
   const user = await User.findById(req.params.id);
   await user.populate("songs");
   const userSongs = user.songs;
@@ -114,9 +114,9 @@ app.post(
     const currentUser = await User.findOne({ username: req.body.username });
     const match = await bcrypt.compare(req.body.password, currentUser.password);
     if (match) {
-      req.session.user = currentUser._id;
+      req.session.user = {id: currentUser.id, username: currentUser.username}
       req.session.save();
-      res.send(req.session);
+      res.json(req.session.user);
     }
   })
 );
@@ -128,12 +128,13 @@ app.get(
     res.json("session ended");
 });
 
-app.get("/AuthCheck", (req, res) => {
-  if (req.session.user) {
-    return res.json(req.session);
-  }
-  res.json(req.session);
-});
+app.get(
+  "/AuthCheck",
+  (req, res) => {
+    if (req.session){
+      res.json(req.session.user);
+    }
+})
 
 app.use((err, req, res, next) => {
   console.log(err, "hello");

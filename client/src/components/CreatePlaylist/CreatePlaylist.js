@@ -1,14 +1,18 @@
 import classes from "./CreatePlaylist.module.css";
 import axios from "axios";
+import { useContext } from "react";
+import AuthContext from "../../store/auth-context";
 
 function CreatePlaylist(props) {
+  const authCtx = useContext(AuthContext);
+
   async function submitHandler(evt) {
     evt.preventDefault();
     const data = { name: evt.target[0].value };
     try {
       await axios.post(
-        `http://localhost:5000/${localStorage.getItem("id")}/CreatePlaylist`,
-        data
+        `http://localhost:5000/${authCtx.user.id}/CreatePlaylist`,
+        data, {withCredentials: true}
       );
       props.updateList();
       props.close();

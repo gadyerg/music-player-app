@@ -1,19 +1,20 @@
 import Playlist from "./Playlist.js";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import classes from "./PlaylistsList.module.css";
+import AuthContext from "../../store/auth-context";
 
 function PlaylistsList() {
   const [popup, setPopup] = useState(false);
   const [listOfPlaylists, setListOfPlaylists] = useState([]);
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     async function getPlaylists() {
       try {
-        const userData = await axios.get("http://localhost:5000/AuthCheck", {withCredentials: true});
         const playlistData = await axios.get(
-          `http://localhost:5000/${userData.data.user}/GetPlaylists`
+          `http://localhost:5000/${authCtx.user.id}/GetPlaylists`
         );
         setListOfPlaylists(playlistData.data);
       } catch {
@@ -34,7 +35,7 @@ function PlaylistsList() {
 
   async function updatePlaylistList() {
     const updatedData = await axios.get(
-      `http://localhost:5000/${localStorage.getItem("id")}/GetPlaylists`
+      `http://localhost:5000/${authCtx.user.id}/GetPlaylists`
     );
     setListOfPlaylists(updatedData.data);
   }
