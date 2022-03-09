@@ -14,11 +14,11 @@ function PlaylistsList() {
     async function getPlaylists() {
       try {
         const playlistData = await axios.get(
-          `http://localhost:5000/${authCtx.user.id}/GetPlaylists`
+          `http://localhost:5000/${authCtx.user.id}/GetPlaylists`, {withCredentials: true}
         );
         setListOfPlaylists(playlistData.data);
-      } catch {
-        console.log("error");
+      } catch (err){
+        console.log(err);
       }
     }
 

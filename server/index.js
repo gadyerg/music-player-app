@@ -134,7 +134,19 @@ app.get(
     if (req.session){
       res.json(req.session.user);
     }
-})
+});
+
+app.put("/:id/editPlaylist", async (req, res) => {
+  const playlist = await Playlist.findById(req.params.id);
+  const user = await User.findById(req.session.user.id);
+  const song = await Song.findById(req.body.song);
+  if (user.playlists.includes(playlist._id)) {
+    playlists.songs.push(song);
+    playlist.save();
+  } else {
+    console.log('not authorized');
+  }
+});
 
 app.use((err, req, res, next) => {
   console.log(err, "hello");
