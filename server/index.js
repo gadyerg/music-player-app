@@ -52,16 +52,20 @@ mongoose
   .then(console.log("connected to mongodb"));
 
 app.post("/AddSong", upload.fields(fields), middleware.checkLogIn, async (req, res) => {
-  const currentUser = await User.findById(req.body.id);
+  const currentUser = await User.findById(req.session.user.id);
   const info = {
     ...req.body,
     cover: "uploads/" + req.files.cover[0].filename,
     song: "uploads/" + req.files.song[0].filename, };
   if (
-    !req.files.cover[0].mimetype.includes("image") ||
+    !req.files.cover[0].mimetype.includes("image")
+  ) {
+    res.json("not a valid image file");
+  }
+  if (
     !req.files.song[0].mimetype.includes("audio")
   ) {
-    throw new Error("not valid file type");
+    res.json('not a valid audio file');
   }
   const newSong = await new Song(info);
   currentUser.songs.push(newSong);

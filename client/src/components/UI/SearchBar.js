@@ -8,7 +8,7 @@ function SearchBar(props) {
   const ctx = useContext(SongContext);
   const [search, setSearch] = useState("");
 
-  const searchFilter = ctx.currentSongList.filter((el) => {
+  const searchFilter = ctx.songList.filter((el) => {
     if (el.title && search.length > 0) {
       return el.title.toLowerCase().startsWith(search.toLowerCase());
     }
@@ -27,7 +27,7 @@ function SearchBar(props) {
   function onEnter(evt) {
     if (evt.key === "Enter" && searchFilter.length > 0) {
       console.log(searchFilter);
-      const index = ctx.currentSongList.findIndex(
+      const index = ctx.songList.findIndex(
         (el) => el._id === searchFilter[0]._id
       );
       props.passSongIndex(index);

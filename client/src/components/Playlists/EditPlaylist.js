@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import classes from "./EditPlaylist.module.css";
+import Song from "./Song";
+import axios from "axios";
 
 function EditPlaylist(props) {
+  
   return (
     <div>
       <div>

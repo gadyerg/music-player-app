@@ -11,9 +11,6 @@ import forward from "../../assets/forward.svg";
 import backward from "../../assets/back.svg";
 import AuthContext from "../../store/auth-context";
 
-let song = new Audio();
-let songList = [{}];
-
 function MusicPlayer(props) {
   const [gotData, setGotData] = useState(false);
   const ctx = useContext(SongContext);
@@ -27,8 +24,7 @@ function MusicPlayer(props) {
         const allSongs = await axios.get(
           `http://localhost:5000/${authCtx.user.id}/GetSongs`, {withCredentials: true}
         );
-        songList = allSongs.data;
-        ctx.currentSongList = songList;
+        ctx.changeSongList(allSongs.data);
         setGotData(true);
       } catch {
         setError(true);
@@ -40,31 +36,30 @@ function MusicPlayer(props) {
 
   // update song src on a different song
   if (
-    songList[0] !== undefined &&
-    song.src !== `http://localhost:5000/${songList[props.currentSong].song}`
+    ctx.songList[0] !== undefined &&
+    ctx.song.src !== `http://localhost:5000/${ctx.songList[props.currentSong].song}`
   ) {
-    song.src = `http://localhost:5000/${songList[props.currentSong].song}`;
-    ctx.song = song;
+    ctx.song.src = `http://localhost:5000/${ctx.songList[props.currentSong].song}`;
   }
 
   if (isPlaying) {
-    song.play();
+    ctx.song.play();
   }
 
   function Play() {
     setIsPlaying(true);
-    song.play();
+    ctx.song.play();
   }
 
   function Pause() {
     setIsPlaying(false);
-    song.pause();
+    ctx.song.pause();
   }
 
   // next and prev both toggle through the songs and loop when the arrray of songs finishes
   async function NextSong() {
     props.setCurrentSong((prevState) => {
-      if (songList[prevState + 1] === undefined) {
+      if (ctx.songList[prevState + 1] === undefined) {
         return 0;
       }
       return prevState + 1;
@@ -74,7 +69,7 @@ function MusicPlayer(props) {
   function PrevSong() {
     props.setCurrentSong((prevState) => {
       if (props.currentSong === 0) {
-        return songList.length - 1;
+        return ctx.songList.length - 1;
       }
       return prevState - 1;
     });
@@ -84,41 +79,41 @@ function MusicPlayer(props) {
   function timeControl(clientX, offsetLeft, clientWidth) {
     const x = clientX - offsetLeft;
     const songTime = x / clientWidth;
-    song.currentTime = songTime * song.duration;
+    ctx.song.currentTime = songTime * ctx.song.duration;
   }
 
   return (
     <div className={classes.player}>
       <div className={classes.box}>
-        {songList[0] === undefined && <p>No songs found.</p>}
+        {ctx.songList[0] === undefined && <p>No songs found.</p>}
         {!gotData && <p>loading...</p>}
-        {gotData && !error && songList[0] !== undefined && (
+        {gotData && !error && ctx.songList[0] !== undefined && (
           <div className={classes["cover-pic"]}>
             {isPlaying ? (
               <motion.img
                 animate="spin"
                 variants={imageSpin}
                 src={`http://localhost:5000/${
-                  songList[props.currentSong].cover
+                  ctx.songList[props.currentSong].cover
                 }`}
                 alt="song cover"
               />
             ) : (
               <img
                 src={`http://localhost:5000/${
-                  songList[props.currentSong].cover
+                  ctx.songList[props.currentSong].cover
                 }`}
                 alt="song cover"
               />
             )}
             <p>
-              {`${songList[props.currentSong].title}`} -{" "}
-              {`${songList[props.currentSong].artist}`}
+              {`${ctx.songList[props.currentSong].title}`} -{" "}
+              {`${ctx.songList[props.currentSong].artist}`}
             </p>
             <TimeBar
               onSongEnd={NextSong}
               onSetTime={timeControl}
-              currentSong={song}
+              currentSong={ctx.song}
             />
 
             {/* The three media buttons and toggle for play and pause */}

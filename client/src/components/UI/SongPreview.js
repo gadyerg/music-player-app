@@ -6,7 +6,7 @@ function SongPreview(props) {
   const ctx = useContext(SongContext);
 
   function songClick() {
-    const songIndex = ctx.currentSongList.findIndex(
+    const songIndex = ctx.songList.findIndex(
       (el) => el._id === props.id
     );
     props.onSongClick(songIndex);
