@@ -5,11 +5,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./store/auth-context";
+import { SongProvider } from "./store/song-context";
 
 ReactDOM.render(
   <BrowserRouter>
     <AuthProvider>
-      <App />
+      <SongProvider>
+        <App />
+      </SongProvider>
     </AuthProvider>
   </BrowserRouter>,
   document.getElementById("root")

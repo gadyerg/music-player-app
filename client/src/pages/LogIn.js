@@ -5,10 +5,7 @@ import SongContext from "../store/song-context";
 function LogIn() {
   const songCtx = useContext(SongContext);
 
-  if (songCtx.song) {
-    songCtx.song.pause();
-    songCtx.song.currentTime = 0;
-  }
+  songCtx.onPageChange();
 
   return <LogInForm />;
 }

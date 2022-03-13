@@ -4,13 +4,19 @@ const SongContext = React.createContext({
   song: new Audio(),
   changeSong: () =>{},
   songList: [{}],
-  changeSongList: () => {}
+  changeSongList: () => {},
+  onPageChange: () => {},
 });
 
 export function SongProvider (props) {
   const [song, setSong] = useState(new Audio());
   const [songList, setSongList] = useState([{}]);
-  
+
+  function stopSong() {
+    song.pause();
+    song.currentTime = 0;
+  }
+
   return (
     <SongContext.Provider
       value={{
@@ -18,6 +24,7 @@ export function SongProvider (props) {
         changeSong: setSong,
         songList: songList,
         changeSongList: setSongList,
+        onPageChange: stopSong,
       }}
     >
       {props.children}

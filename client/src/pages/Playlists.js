@@ -5,10 +5,7 @@ import SongContext from "../store/song-context";
 function Playlists() {
   const ctx = useContext(SongContext);
 
-  if (ctx.song) {
-    ctx.song.pause();
-    ctx.song.currentTime = 0;
-  }
+  ctx.onPageChange();
 
   return <PlaylistList />;
 }

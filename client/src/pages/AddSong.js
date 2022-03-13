@@ -5,10 +5,7 @@ import Form from "../components/Form/Form";
 function AddSong() {
   const songCtx = useContext(SongContext);
 
-  if (songCtx.song) {
-    songCtx.song.pause();
-    songCtx.song.currentTime = 0;
-  }
+  songCtx.onPageChange();
 
   return <Form />;
 }

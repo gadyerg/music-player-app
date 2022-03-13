@@ -12,10 +12,8 @@ function Home() {
 
   return (
     <React.Fragment>
-      <SongProvider>
-        <SearchBar passSongIndex={getIndex} />
-        <MusicPlayer currentSong={currentSong} setCurrentSong={setCurrentSong} />
-      </SongProvider>
+      <SearchBar passSongIndex={getIndex} />
+      <MusicPlayer currentSong={currentSong} setCurrentSong={setCurrentSong} />
     </React.Fragment>
   );
 }

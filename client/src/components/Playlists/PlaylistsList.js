@@ -4,10 +4,12 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import classes from "./PlaylistsList.module.css";
 import AuthContext from "../../store/auth-context";
+import EditPlaylist from "./EditPlaylist.js";
 
 function PlaylistsList() {
   const [popup, setPopup] = useState(false);
   const [listOfPlaylists, setListOfPlaylists] = useState([]);
+  const [edit, setEdit] = useState(true);
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
@@ -42,6 +44,7 @@ function PlaylistsList() {
 
   return (
     <React.Fragment>
+      {edit && <EditPlaylist />}
       {popup && (
         <CreatePlaylist close={onClosePopup} updateList={updatePlaylistList} />
       )}
