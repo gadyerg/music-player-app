@@ -15,7 +15,7 @@ const playlistSchema = mongoose.Schema({
   thumbnail: {
     type: String,
     required: true,
-    default: "uploads/musicnote.svg",
+    default: "default/musicnote.svg",
   }
 });
 

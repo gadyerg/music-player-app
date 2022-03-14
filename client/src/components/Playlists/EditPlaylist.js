@@ -20,8 +20,8 @@ function EditPlaylist(props) {
   return (
     <div className={classes.background}>
       <div className={classes.card}>
-        <img alt="Playlist cover"/>
-        <h1 className={classes.name}>Name</h1>
+        <img src={`http://localhost:5000/${props.thumbnail}`}alt="Playlist cover" className={classes.thumbnail} />
+        <h1 className={classes.name}>{props.name}</h1>
         {songs[0]._id && <ul>
           {songs.map((song) => {
               return (<li key={song._id}>

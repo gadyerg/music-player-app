@@ -36,3 +36,8 @@ p {
 .select {
   background-color: #2cb84f;
 }
+
+.thumbnail {
+  height: 4.5rem;
+  width: 4.5rem;
+}
