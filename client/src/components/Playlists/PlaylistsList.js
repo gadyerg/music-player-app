@@ -60,6 +60,7 @@ function PlaylistsList() {
             <Playlist
               name={playlist.name}
               thumbnail={playlist.thumbnail}
+              songs={playlist.songs}
               key={playlist._id}
               id={playlist._id}
             />

@@ -7,3 +7,20 @@ img {
   height: 6rem;
   display: flex;
 }
+
+.add {
+  font-size: 1.15rem;
+  height: 2rem;
+  width: 3rem;
+  cursor: pointer;
+  align-self: center;
+  margin-right: 1rem;
+}
+
+.remove {
+  font-size: 1.15rem;
+  height: 2rem;
+  cursor: pointer;
+  align-self: center;
+  margin-right: 1rem;
+}

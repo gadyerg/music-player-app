@@ -34,7 +34,7 @@ app.use(session({
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/default", express.static(__dirname + "/default"));
-app.use(cors({credentials: true, origin: "http://localhost:3000", methods: ["GET", "POST", "DELETE"]}));
+app.use(cors({credentials: true, origin: "http://localhost:3000", methods: ["GET", "POST", "DELETE", "PUT", "PATCH"]}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -83,7 +83,7 @@ app.post("/:id/CreatePlaylist", middleware.checkLogIn, async (req, res) => {
   user.playlists.push(newPlaylist);
   user.save();
   newPlaylist.save();
-  res.end();
+  res.json('success');
 });
 
 app.get("/:id/GetPlaylists", middleware.checkLogIn, async (req, res) => {
@@ -141,15 +141,26 @@ app.get(
     }
 });
 
-app.put("/:id/editPlaylist", async (req, res) => {
+app.patch("/Playlist/:id/AddSong", middleware.checkLogIn, async (req, res) => {
   const playlist = await Playlist.findById(req.params.id);
   const user = await User.findById(req.session.user.id);
   const song = await Song.findById(req.body.song);
   if (user.playlists.includes(playlist._id)) {
-    playlists.songs.push(song);
+    playlist.songs.push(song);
     playlist.save();
-  } else {
-    console.log('not authorized');
+    return  res.json('added song');
+  }
+  res.json({authorized: false});
+});
+
+app.patch("/Playlist/:id/RemoveSong", async (req, res) => {
+  const playlist = await Playlist.findById(req.params.id);
+  const user = await User.findById(req.session.user.id);
+  const song = await Song.findById(req.body.song);
+  if (user.playlists.includes(playlist._id)) {
+    playlist.songs.pull(song);
+    playlist.save();
+    res.json('song removed');
   }
 });
 

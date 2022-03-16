@@ -16,7 +16,6 @@ function LogInForm() {
     };
     try {
       const match = await axios.post("http://localhost:5000/LogIn", data, {withCredentials: true});
-      console.log(match.data.user);
       if (match.data.id) {
         authCtx.onLogIn(match.data);
         navigate("/");

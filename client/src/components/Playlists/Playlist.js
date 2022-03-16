@@ -11,7 +11,7 @@ function Playlist(props) {
 
   return (
     <React.Fragment>
-      {isEditing && <EditPlaylist name={props.name} thumbnail={props.thumbnail} />}
+      {isEditing && <EditPlaylist id={props.id} songs={props.songs} name={props.name} thumbnail={props.thumbnail} />}
       <div className={classes.info}>
         <img src={`http://localhost:5000/${props.thumbnail}`} alt="playlist Thumnail" className={classes.thumbnail} />
         <p>{props.name}</p>
