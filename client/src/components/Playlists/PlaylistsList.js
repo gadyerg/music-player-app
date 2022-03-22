@@ -8,14 +8,13 @@ import AuthContext from "../../store/auth-context";
 function PlaylistsList() {
   const [popup, setPopup] = useState(false);
   const [listOfPlaylists, setListOfPlaylists] = useState([]);
-  const [edit, setEdit] = useState(true);
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     async function getPlaylists() {
       try {
         const playlistData = await axios.get(
-          `http://localhost:5000/${authCtx.user.id}/GetPlaylists`, {withCredentials: true}
+          "http://localhost:5000/playlist", {withCredentials: true}
         );
         setListOfPlaylists(playlistData.data);
       } catch (err){
@@ -36,7 +35,7 @@ function PlaylistsList() {
 
   async function updatePlaylistList() {
     const updatedData = await axios.get(
-      `http://localhost:5000/${authCtx.user.id}/GetPlaylists`
+      "http://localhost:5000/playlist", { withCredentials: true }
     );
     setListOfPlaylists(updatedData.data);
   }
@@ -63,6 +62,7 @@ function PlaylistsList() {
               songs={playlist.songs}
               key={playlist._id}
               id={playlist._id}
+              update={updatePlaylistList}
             />
           );
         })}

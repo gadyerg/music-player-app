@@ -1,0 +1,14 @@
+.error-container {
+  margin: 0 auto;
+}
+
+.error-header {
+  text-align: center;
+  color: #d94141
+}
+
+.message {
+  font-size: 1.2rem;
+  color: white;
+  color: #d94141;
+}

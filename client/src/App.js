@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Home from "./pages/Home";
 import Nav from "./components/UI/Nav";
 import AddSong from "./pages/AddSong";
@@ -32,7 +32,7 @@ function App() {
           element={authCtx.isLoggedIn ? <Navigate to="/" /> : <LogIn />}
         />
         <Route
-          path="/Playlists"
+          path="/playlists"
           element={authCtx.isLoggedIn ? <Playlists /> : <LogIn />}
         />
       </Routes>

@@ -10,19 +10,30 @@ function EditPlaylist(props) {
   
   useEffect(() => {
     async function getSongData() {
-      const songData = await axios.get(`http://localhost:5000/${authCtx.user.id}/GetSongs`, { withCredentials: true });
+      const songData = await axios.get(`http://localhost:5000/songs`, { withCredentials: true });
       setSongs(songData.data);
     }
 
     getSongData();
   }, []);
 
+  async function deletePlaylist() {
+    try {
+      await axios.delete(`http://localhost:5000/playlist/${props.id}`, { withCredentials: true });
+      props.close();
+      props.update();
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className={classes.background}>
       <div className={classes.card}>
         <img src={`http://localhost:5000/${props.thumbnail}`}alt="Playlist cover" className={classes.thumbnail} />
         <h1 className={classes.name}>{props.name}</h1>
-        {songs[0]._id ? <ul className={classes.songList}>
+        <button className={classes.delete} onClick={deletePlaylist}>Delete Playlist</button>
+        {songs[0] ? <ul className={classes.songList}>
           {songs.map((song) => {
               return (<li key={song._id}>
                 <Song
@@ -35,7 +46,7 @@ function EditPlaylist(props) {
               </li>)
           })}
         </ul> :
-          <h2>No songs found.</h2>}
+          <h2 className={classes["no-songs"]}>No songs found.</h2>}
       </div>
     </div>
   )

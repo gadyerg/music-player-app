@@ -22,7 +22,7 @@ function Song(props) {
     }
 
     try {
-      await axios.patch(`http://localhost:5000/Playlist/${props.playlist}/AddSong`, data, { withCredentials: true });
+      await axios.patch(`http://localhost:5000/playlist/${props.playlist}/addsong`, data, { withCredentials: true });
       setInPlaylist((prevState) => {
         return !prevState
       });
@@ -37,7 +37,7 @@ function Song(props) {
     }
 
     try {
-      await axios.patch(`http://localhost:5000/Playlist/${props.playlist}/RemoveSong`, data, { withCredentials: true });
+      await axios.patch(`http://localhost:5000/Playlist/${props.playlist}/removesong`, data, { withCredentials: true });
       setInPlaylist((prevState) => {
         return !prevState
       });
@@ -45,7 +45,6 @@ function Song(props) {
       console.log(err);
     }
   }
-  console.log(inPlaylist);
 
   return (
     <div className={classes.box}>

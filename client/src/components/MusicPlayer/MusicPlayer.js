@@ -22,7 +22,7 @@ function MusicPlayer(props) {
     async function getSongs() {
       try {
         const allSongs = await axios.get(
-          `http://localhost:5000/${authCtx.user.id}/GetSongs`, {withCredentials: true}
+          "http://localhost:5000/songs", {withCredentials: true}
         );
         ctx.changeSongList(allSongs.data);
         setGotData(true);
@@ -31,8 +31,13 @@ function MusicPlayer(props) {
         setGotData(true);
       }
     }
-    getSongs();
-  }, [ctx]);
+
+    if (ctx.songList[0] === undefined || !ctx.songList[0].src) {
+      getSongs();
+    }
+  }, [authCtx, ctx])
+
+  
 
   // update song src on a different song
   if (
@@ -59,8 +64,7 @@ function MusicPlayer(props) {
   // next and prev both toggle through the songs and loop when the arrray of songs finishes
   async function NextSong() {
     props.setCurrentSong((prevState) => {
-      if (ctx.songList[prevState + 1] === undefined) {
-        return 0;
+      if (ctx.songList[prevState + 1] === undefined) { return 0;
       }
       return prevState + 1;
     });

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const User = require("./User");
 
 const playlistSchema = mongoose.Schema({
   name: {
@@ -9,7 +10,6 @@ const playlistSchema = mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Song",
-      unique: true,
     },
   ],
   thumbnail: {

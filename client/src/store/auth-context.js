@@ -30,7 +30,7 @@ export function AuthProvider(props) {
   }
 
   async function logoutHandler() {
-    await axios.get("http://localhost:5000/SignOut", {withCredentials: true});
+    await axios.get("http://localhost:5000/signout", {withCredentials: true});
     setIsLoggedIn(false);
   } 
 

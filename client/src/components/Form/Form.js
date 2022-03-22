@@ -25,7 +25,7 @@ function Form() {
     data.append("id", localStorage.getItem("id"));
 
     try {
-      await axios.post("http://localhost:5000/AddSong", data, config);
+      await axios.post("http://localhost:5000/songs", data, config);
       navigate("/");
     } catch {
       setError(true);

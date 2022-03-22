@@ -11,9 +11,10 @@ function CreatePlaylist(props) {
     const data = { name: evt.target[0].value };
     try {
       await axios.post(
-        `http://localhost:5000/${authCtx.user.id}/CreatePlaylist`,
+        `http://localhost:5000/playlist`,
         data, {withCredentials: true}
       );
+      console.log('done');
       props.updateList();
       props.close();
     } catch {

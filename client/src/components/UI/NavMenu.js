@@ -34,7 +34,7 @@ function NavMenu(props) {
               <Link to="/add-song">Add Song</Link>
             </li>
             <li onClick={props.close}>
-              <Link to="/Playlists">Playlists</Link>
+              <Link to="/playlists">Playlists</Link>
             </li>
             <li>
               <button onClick={logOut}>Log Out</button>
