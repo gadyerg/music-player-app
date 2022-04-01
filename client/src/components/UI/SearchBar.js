@@ -38,7 +38,11 @@ function SearchBar(props) {
   return (
     <div className={classes.previewnbar}>
       <div className={classes.bar}>
-        <img src={magnifyingGlass} alt="magnifying glass" className={classes.glass} />
+        <img
+          src={magnifyingGlass}
+          alt="magnifying glass"
+          className={classes.glass}
+        />
         <input
           type="text"
           onChange={getSearch}

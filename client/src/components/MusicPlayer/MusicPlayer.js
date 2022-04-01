@@ -21,9 +21,9 @@ function MusicPlayer(props) {
   useEffect(() => {
     async function getSongs() {
       try {
-        const allSongs = await axios.get(
-          "http://localhost:5000/songs", {withCredentials: true}
-        );
+        const allSongs = await axios.get("http://localhost:5000/songs", {
+          withCredentials: true,
+        });
         ctx.changeSongList(allSongs.data);
         setGotData(true);
       } catch {
@@ -35,16 +35,17 @@ function MusicPlayer(props) {
     if (ctx.songList[0] === undefined || !ctx.songList[0].src) {
       getSongs();
     }
-  }, [authCtx, ctx])
-
-  
+  }, [authCtx, ctx]);
 
   // update song src on a different song
   if (
     ctx.songList[0] !== undefined &&
-    ctx.song.src !== `http://localhost:5000/${ctx.songList[props.currentSong].song}`
+    ctx.song.src !==
+      `http://localhost:5000/${ctx.songList[props.currentSong].song}`
   ) {
-    ctx.song.src = `http://localhost:5000/${ctx.songList[props.currentSong].song}`;
+    ctx.song.src = `http://localhost:5000/${
+      ctx.songList[props.currentSong].song
+    }`;
   }
 
   if (isPlaying) {
@@ -64,7 +65,8 @@ function MusicPlayer(props) {
   // next and prev both toggle through the songs and loop when the arrray of songs finishes
   async function NextSong() {
     props.setCurrentSong((prevState) => {
-      if (ctx.songList[prevState + 1] === undefined) { return 0;
+      if (ctx.songList[prevState + 1] === undefined) {
+        return 0;
       }
       return prevState + 1;
     });

@@ -13,11 +13,11 @@ function PlaylistsList() {
   useEffect(() => {
     async function getPlaylists() {
       try {
-        const playlistData = await axios.get(
-          "http://localhost:5000/playlist", {withCredentials: true}
-        );
+        const playlistData = await axios.get("http://localhost:5000/playlist", {
+          withCredentials: true,
+        });
         setListOfPlaylists(playlistData.data);
-      } catch (err){
+      } catch (err) {
         console.log(err);
       }
     }
@@ -34,9 +34,9 @@ function PlaylistsList() {
   }
 
   async function updatePlaylistList() {
-    const updatedData = await axios.get(
-      "http://localhost:5000/playlist", { withCredentials: true }
-    );
+    const updatedData = await axios.get("http://localhost:5000/playlist", {
+      withCredentials: true,
+    });
     setListOfPlaylists(updatedData.data);
   }
 

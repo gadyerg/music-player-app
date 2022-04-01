@@ -1,6 +1,6 @@
 export const menuSlide = {
   initial: {
-    x: "-17vw",
+    x: "-20rem",
   },
   slideIn: {
     x: 0,
@@ -10,7 +10,7 @@ export const menuSlide = {
     },
   },
   slideOut: {
-    x: "-17vw",
+    x: "-20rem",
     transition: {
       ease: "linear",
       duration: 0.2,

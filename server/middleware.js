@@ -4,9 +4,9 @@ module.exports.checkLogIn = (req, res, next) => {
   if (req.session.user) {
     next();
   } else {
-      res.json("Not Authorized");
+    res.json("Not Authorized");
   }
-}
+};
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

@@ -16,7 +16,7 @@ const playlistSchema = mongoose.Schema({
     type: String,
     required: true,
     default: "default/musicnote.svg",
-  }
+  },
 });
 
 const Playlist = mongoose.model("Playlist", playlistSchema);

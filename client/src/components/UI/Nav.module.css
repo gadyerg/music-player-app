@@ -1,11 +1,13 @@
 .nav-container {
   position: fixed;
   display: flex;
+  z-index: 5;
 }
 
 .nav-container button {
   color: white;
-  position: absolute;
+  z-index: 3;
+  position: fixed;
   cursor: pointer;
   display: block;
   height: 3rem;

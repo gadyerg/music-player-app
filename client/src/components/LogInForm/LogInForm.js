@@ -8,7 +8,7 @@ import AuthContext from "../../store/auth-context";
 function LogInForm() {
   const navigate = useNavigate();
   const authCtx = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function submitHandler(evt) {
     evt.preventDefault();
@@ -17,12 +17,14 @@ function LogInForm() {
       password: evt.target[1].value,
     };
     try {
-      const match = await axios.post("http://localhost:5000/login", data, { withCredentials: true });
+      const match = await axios.post("http://localhost:5000/login", data, {
+        withCredentials: true,
+      });
       if (match.data.id) {
         authCtx.onLogIn(match.data);
         navigate("/");
       }
-    } catch (err){
+    } catch (err) {
       setErrorMessage(err.response.data);
     }
   }
@@ -37,8 +39,7 @@ function LogInForm() {
         <input type="password" id="password" required />
         <button>Log In</button>
       </form>
-      {errorMessage &&
-      <Error message={errorMessage}/>}
+      {errorMessage && <Error message={errorMessage} />}
     </React.Fragment>
   );
 }

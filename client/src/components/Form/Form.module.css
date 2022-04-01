@@ -48,3 +48,9 @@
   margin: 1rem 0;
   width: 50%;
 }
+
+@media (max-width: 480px) {
+  .container {
+    width: 80%;
+  }
+}

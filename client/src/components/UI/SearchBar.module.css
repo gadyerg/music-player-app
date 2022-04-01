@@ -1,6 +1,7 @@
 .bar {
   border-radius: 1rem;
   position: fixed;
+  z-index: 0;
   top: 1rem;
   right: 1rem;
   width: 20%;
@@ -46,5 +47,16 @@
 .glass {
   width: 1.4rem;
   height: 1.4rem;
-  transform: translateY(.05rem);
+  transform: translateY(0.05rem);
+}
+
+@media (max-width: 480px) {
+  .bar {
+    width: 70%;
+    right: 10vw;
+  }
+  .mini-preview {
+    width: 63%;
+    right: 12vw;
+  }
 }

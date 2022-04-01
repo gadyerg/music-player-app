@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 const SongContext = React.createContext({
   song: new Audio(),
-  changeSong: () =>{},
+  changeSong: () => {},
   songList: [{}],
   changeSongList: () => {},
   onPageChange: () => {},
 });
 
-export function SongProvider (props) {
+export function SongProvider(props) {
   const [song, setSong] = useState(new Audio());
   const [songList, setSongList] = useState([{}]);
 
@@ -29,7 +29,7 @@ export function SongProvider (props) {
     >
       {props.children}
     </SongContext.Provider>
-  )
+  );
 }
 
 export default SongContext;

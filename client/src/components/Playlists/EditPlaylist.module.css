@@ -1,5 +1,5 @@
 .background {
-  background-color: rgba(128, 128, 128, 0.5); 
+  background-color: rgba(128, 128, 128, 0.5);
   top: 0;
   left: 0;
   width: 100vw;
@@ -16,7 +16,7 @@
   height: 50%;
   width: 50%;
   border: none;
-  border-radius: .4rem;
+  border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
 }
@@ -36,7 +36,7 @@
   list-style-type: none;
   overflow-y: scroll;
   width: 100%;
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .delete {
@@ -44,12 +44,12 @@
   width: 6rem;
   height: 3.5rem;
   border: none;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   color: white;
   background-color: red;
-  margin-bottom: .5rem;
-  margin-top: .1rem;
-  margin-left: .5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.1rem;
+  margin-left: 0.5rem;
   cursor: pointer;
 }
 
@@ -58,5 +58,11 @@
 }
 
 li {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 95%;
+  }
 }

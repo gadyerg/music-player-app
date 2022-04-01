@@ -1,4 +1,5 @@
 .nav {
+  position: fixed;
   height: 100vh;
   width: 17vw;
   background-color: rgb(221, 196, 148);
@@ -26,11 +27,20 @@
 }
 
 .nav button {
-  width: 100%;
+  width: 17vw;
   font-size: 4.5rem;
   cursor: pointer;
 }
 
 .popup {
   cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .nav {
+    width: 100vw;
+  }
+  .nav button {
+    width: 100%;
+  }
 }
