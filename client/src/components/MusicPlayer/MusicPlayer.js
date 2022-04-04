@@ -32,10 +32,12 @@ function MusicPlayer(props) {
       }
     }
 
-    if (ctx.songList[0] === undefined || !ctx.songList[0].src) {
+    if (ctx.songList[0] === undefined || !ctx.songList[0].song) {
       getSongs();
+    } else if (ctx.songList[0].song) {
+      setGotData(true);
     }
-  }, [authCtx, ctx]);
+  }, []);
 
   // update song src on a different song
   if (

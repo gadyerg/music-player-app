@@ -4,12 +4,15 @@ import { motion } from "framer-motion";
 import { menuSlide } from "../../animations/animtions";
 import { Link } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
+import SongContext from "../../store/song-context";
 import { useContext } from "react";
 
 function NavMenu(props) {
   const ctx = useContext(AuthContext);
+  const songCtx = useContext(SongContext);
 
   async function logOut() {
+    songCtx.changeSongList([{}]);
     await ctx.onLogOut();
     props.close();
   }

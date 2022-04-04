@@ -5,6 +5,7 @@ import AddSong from "./pages/AddSong";
 import SignUp from "./pages/SignUp";
 import LogIn from "./pages/LogIn";
 import Playlists from "./pages/Playlists";
+import NotFound from "./pages/NotFound";
 import { Navigate, Route, Routes } from "react-router-dom";
 import AuthContext from "./store/auth-context";
 
@@ -15,6 +16,10 @@ function App() {
     <div>
       <Nav />
       <Routes>
+        <Route
+          path="*"
+          element={<NotFound />} 
+        />
         <Route
           path="/"
           element={!authCtx.isLoggedIn ? <Navigate to="/login" /> : <Home />}

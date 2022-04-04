@@ -40,6 +40,9 @@ function EditPlaylist(props) {
           className={classes.thumbnail}
         />
         <h1 className={classes.name}>{props.name}</h1>
+        <button className={classes.close} onClick={props.close}>
+          Close
+        </button>
         <button className={classes.delete} onClick={deletePlaylist}>
           Delete Playlist
         </button>

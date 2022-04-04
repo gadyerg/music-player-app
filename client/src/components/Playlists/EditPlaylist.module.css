@@ -39,6 +39,20 @@
   margin-bottom: 0.25rem;
 }
 
+.close {
+  font-size: 1.2rem;
+  width: 6rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  color: white;
+  background-color: #26b5a7;
+  margin-bottom: 0.5rem;
+  margin-top: 0.1rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
 .delete {
   font-size: 1.2rem;
   width: 6rem;
@@ -64,5 +78,6 @@ li {
 @media (max-width: 480px) {
   .card {
     width: 95%;
+    height: 70%;
   }
 }

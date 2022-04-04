@@ -21,7 +21,7 @@ function Playlist(props) {
   async function select() {
     try {
       const data = await axios.get(
-        `http://localhost:5000/playlist/${props.id}/getsongs`,
+        `http://localhost:5000/playlist/${props.id}/songs`,
         { withCredentials: true }
       );
       songCtx.changeSongList(data.data);

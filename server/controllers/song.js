@@ -10,10 +10,10 @@ module.exports.uploadSong = async (req, res, next) => {
     song: "uploads/" + req.files.song[0].filename,
   };
   if (!req.files.cover[0].mimetype.includes("image")) {
-    res.json("not a valid image file");
+    next(new ExpressError("Not a valid image file", 401));
   }
   if (!req.files.song[0].mimetype.includes("audio")) {
-    res.json("not a valid audio file");
+    next(new ExpressError("Not a valid audio file", 401));
   }
   const newSong = await new Song(info);
   currentUser.songs.push(newSong);
