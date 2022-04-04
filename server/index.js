@@ -18,11 +18,6 @@ const port = process.env.PORT || 5000;
 const secret = process.env.SECRET || "secret";
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1/music-app";
 
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("../client/build"));
-}
-
 mongoose
   .connect(dbUrl)
   .then(console.log("connected to mongodb"));
