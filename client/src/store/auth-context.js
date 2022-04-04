@@ -14,7 +14,7 @@ export function AuthProvider(props) {
 
   useEffect(() => {
     async function checkAuth() {
-      const authCheck = await axios.get("http://localhost:5000/AuthCheck", {
+      const authCheck = await axios.get("https://music-player-2022.herokuapp.com/AuthCheck", {
         withCredentials: true,
       });
       if (authCheck.data.id) {
