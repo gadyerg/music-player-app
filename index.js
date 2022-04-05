@@ -43,6 +43,10 @@ app.use(
   })
 );
 
+app.use(cors({
+  origin: "https://res.cloudinary.com"
+}));
+
 app.use(mongoSanitize());
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
