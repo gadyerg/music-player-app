@@ -57,8 +57,8 @@ app.use(helmet.contentSecurityPolicy({
     scriptsSrc: ["'unsafe-inline'", "'self'"],
     styleSrc: [
       "'unsafe-inline'",
-      "'self'"
-      "https://fonts.googleapis.com/"
+      "'self'",
+      "https://fonts.googleapis.com/",
     ],
     workerSrc: ["'self'", "blob:"],
     objectSrc: [],
@@ -93,8 +93,7 @@ app.use("/", auth);
 app.use("/songs", song);
 
 app.use((err, req, res, next) => {
-  console.log(err);
-//  res.status(err.statusCode).send(err.message);
+  res.status(err.statusCode).send(err.message);
 });
 
 app.listen(port, () => {
