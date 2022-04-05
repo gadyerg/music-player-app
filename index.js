@@ -13,6 +13,7 @@ const song = require("./routes/song");
 const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
 const mongoSanitize = require("express-mongo-sanitize");
+const path = require("path");
 
 const port = process.env.PORT || 5000;
 const secret = process.env.SECRET || "secret";
@@ -69,3 +70,11 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
   console.log("listening...");
 });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
