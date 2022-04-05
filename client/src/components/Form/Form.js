@@ -12,11 +12,6 @@ function Form() {
   async function onSubmitHandler(evt) {
     evt.preventDefault();
 
-    const config = {
-      header: {
-        "Content-ype": "application/json",
-      },
-    };
     const data = new FormData();
     data.append("title", evt.target[0].value);
     data.append("artist", evt.target[1].value);
@@ -27,13 +22,11 @@ function Form() {
       await axios.post(
         "https://music-player-2022.herokuapp.com/songs",
         data,
-        config,
         { withCredentials: true }
       );
       navigate("/");
     } catch(err) {
-      console.log(err.response.data);
-      console.log(err);
+      setError(true);
     }
   }
 

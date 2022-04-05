@@ -82,7 +82,8 @@ app.use("/", auth);
 app.use("/songs", song);
 
 app.use((err, req, res, next) => {
-  res.status(err.statusCode).send(err.message);
+  console.log(err);
+//  res.status(err.statusCode).send(err.message);
 });
 
 app.listen(port, () => {
