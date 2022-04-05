@@ -55,7 +55,7 @@ app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: [],
-    connectSrc: ["'self'"],
+    connectSrc: ["'self'", "https://res.cloudinary.com/dxase4lua/"],
     scriptSrc: ["'unsafe-inline'", "'self'"],
     styleSrc: [
       "'unsafe-inline'",
