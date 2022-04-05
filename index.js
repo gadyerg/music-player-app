@@ -50,6 +50,21 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/default", express.static(__dirname + "/default"));
 
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  directives: {
+    defaultSrc: [],
+    connectSrc: ["'self'"],
+    scriptsSrc: ["'unsafe-inline'", "'self'"],
+    styleSrc: ["'unsafe-inline'", "'self'"],
+    workerSrc: ["'self'", "blob:"],
+    objectSrc: [],
+    imgSrc: [
+      "'self'",
+      "blob:",
+      "data:",
+    ]
+  }
+}));
 
 app.use(
   cors({
