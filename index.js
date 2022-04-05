@@ -44,9 +44,7 @@ app.use(
   })
 );
 
-app.use(cors({
-  origin: "https://res.cloudinary.com"
-}));
+app.use(cors());
 
 app.use(mongoSanitize());
 
