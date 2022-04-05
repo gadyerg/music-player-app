@@ -28,7 +28,8 @@ function Form() {
       await axios.post(
         "https://music-player-2022.herokuapp.com/songs",
         data,
-        config
+        config,
+        { withCredentials: true }
       );
       navigate("/");
     } catch {
@@ -68,7 +69,7 @@ function Form() {
             id="cover"
             onChange={onImageChange}
           />
-          <img src={image} />
+          {image && <img src={image} />}
           <label htmlFor="song" className={classes.filelabel}>
             Song Upload
           </label>
