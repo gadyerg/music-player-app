@@ -13,6 +13,7 @@ const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require("path");
+const cors = require("cors");
 
 const port = process.env.PORT || 5000;
 const secret = process.env.SECRET || "secret";
