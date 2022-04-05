@@ -68,13 +68,11 @@ app.use(helmet.contentSecurityPolicy({
       "'self'",
       "blob:",
       "data:",
-      "https://res.cloudinary.com/dxase4lua/",
     ],
     mediaSrc: [
       "'self'",
       "blob:",
       "data:",
-      "https://res.cloudinary.com/dxase4lua/",
     ],
   }
 }));
