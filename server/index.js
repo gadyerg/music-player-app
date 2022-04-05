@@ -35,7 +35,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 365,
       httpOnly: true,
-      secure: true,
+      secure: false,
     },
   })
 );
@@ -50,7 +50,7 @@ app.use(helmet());
 app.use(
   cors({
     credentials: true,
-    origin: "https://music-player-2022.netlify.app",
+    origin: "http://localhost:3000",
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   })
 );
