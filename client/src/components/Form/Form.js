@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self' blob:; img-src 'self' blob:;" />
 import { useNavigate } from "react-router-dom";
 import classes from "./Form.module.css";
 import axios from "axios";
@@ -22,7 +25,6 @@ function Form() {
     data.append("artist", evt.target[1].value);
     data.append("cover", evt.target[2].files[0]);
     data.append("song", evt.target[3].files[0]);
-    data.append("id", localStorage.getItem("id"));
 
     try {
       await axios.post(
@@ -32,8 +34,9 @@ function Form() {
         { withCredentials: true }
       );
       navigate("/");
-    } catch {
-      setError(true);
+    } catch(err) {
+      console.log(err.response.data);
+      console.log(err);
     }
   }
 
