@@ -11,9 +11,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    resource_type: "auto",
-    folder: "MusicPlayerApp",
-    allowedFormats: ["jpeg", "jpg", "png", "mp3", "wav", "m4a", "flac"],
+    allowedFormats: ["mp4"],
   },
 });
 
