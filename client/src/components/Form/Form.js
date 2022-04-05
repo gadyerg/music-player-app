@@ -68,7 +68,7 @@ function Form() {
             id="cover"
             onChange={onImageChange}
           />
-          <img src={image} alt="song cover" />
+          <img src={image} />
           <label htmlFor="song" className={classes.filelabel}>
             Song Upload
           </label>
