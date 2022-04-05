@@ -55,18 +55,24 @@ app.use(helmet.contentSecurityPolicy({
     defaultSrc: [],
     connectSrc: ["'self'"],
     scriptsSrc: ["'unsafe-inline'", "'self'"],
-    styleSrc: ["'unsafe-inline'", "'self'"],
+    styleSrc: [
+      "'unsafe-inline'",
+      "'self'"
+      "https://fonts.googleapis.com/"
+    ],
     workerSrc: ["'self'", "blob:"],
     objectSrc: [],
     imgSrc: [
       "'self'",
       "blob:",
       "data:",
+      "https://res.cloudinary.com/dxase4lua/",
     ],
     mediaSrc: [
       "'self'",
       "blob:",
       "data:",
+      "https://res.cloudinary.com/dxase4lua/",
     ],
   }
 }));
