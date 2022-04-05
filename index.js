@@ -26,6 +26,8 @@ const store = MongoStore.create({
   secret,
   touchAfter: 24 * 60 * 60,
 });
+
+app.set("trust proxy", 1);
 app.use(
   session({
     store,
