@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self' blob:; img-src 'self' blob:;" />
 import { useNavigate } from "react-router-dom";
 import classes from "./Form.module.css";
 import axios from "axios";
