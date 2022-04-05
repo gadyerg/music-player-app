@@ -62,7 +62,12 @@ app.use(helmet.contentSecurityPolicy({
       "'self'",
       "blob:",
       "data:",
-    ]
+    ],
+    mediaSrc: [
+      "'self'",
+      "blob:",
+      "data:",
+    ],
   }
 }));
 
