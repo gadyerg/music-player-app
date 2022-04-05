@@ -4,7 +4,6 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
-const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const playlist = require("./routes/playlist");
@@ -76,14 +75,6 @@ app.use(helmet.contentSecurityPolicy({
     ],
   }
 }));
-
-app.use(
-  cors({
-    credentials: true,
-    origin: "https://music-player-2022.herokuapp.com",
-    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
-  })
-);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
