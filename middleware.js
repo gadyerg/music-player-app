@@ -1,5 +1,5 @@
 const multer = require("multer");
-const cloudinary = require("cloudinary");
+const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 cloudinary.config({
@@ -9,10 +9,12 @@ cloudinary.config({
 });
 
 const storage = new CloudinaryStorage({
-  cloudinary,
+  cloudinary: cloudinary,
   params: {
-    allowedFormats: ["mp4"],
-  },
+    folder: "MusicPlayerApp/",
+    source_type: "auto",
+    allowedFormats: ["jpeg", "jpg", "png", "mp3", "ma4", "flac"],
+  }
 });
 
 module.exports.checkLogIn = (req, res, next) => {
@@ -23,4 +25,4 @@ module.exports.checkLogIn = (req, res, next) => {
   }
 };
 
-module.exports.upload = multer({ storage: storage });
+module.exports.upload = multer({ storage });
