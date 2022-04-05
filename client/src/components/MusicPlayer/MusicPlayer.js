@@ -38,7 +38,7 @@ function MusicPlayer(props) {
     } else if (ctx.songList[0].song) {
       setGotData(true);
     }
-  }, [ctx]);
+  }, []);
 
   // update song src on a different song
   if (
