@@ -51,7 +51,7 @@ app.use(helmet());
 app.use(
   cors({
     credentials: true,
-    origin: "https://music-player-2022.netlify.app",
+    origin: "https://music-player-2022.herokuapp.com",
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
   })
 );
