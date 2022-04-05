@@ -18,19 +18,17 @@ const port = process.env.PORT || 5000;
 const secret = process.env.SECRET || "secret";
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1/music-app";
 
-mongoose
-  .connect(dbUrl)
-  .then(console.log("connected to mongodb"));
+mongoose.connect(dbUrl).then(console.log("connected to mongodb"));
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
-  secret: "secret",
+  secret,
   touchAfter: 24 * 60 * 60,
 });
 app.use(
   session({
     store,
-    name: 'music-session',
+    name: "music-session",
     secret,
     resave: false,
     saveUninitialized: false,
@@ -63,7 +61,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/playlist", playlist);
 app.use("/", auth);
 app.use("/songs", song);
-
 
 app.use((err, req, res, next) => {
   res.status(err.statusCode).send(err.message);

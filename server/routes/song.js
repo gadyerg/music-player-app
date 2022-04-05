@@ -14,7 +14,8 @@ const fields = [
   },
 ];
 
-router.route("/")
+router
+  .route("/")
   .get(checkLogIn, catchAsync(song.getSongs))
   .post(checkLogIn, upload.fields(fields), catchAsync(song.uploadSong));
 

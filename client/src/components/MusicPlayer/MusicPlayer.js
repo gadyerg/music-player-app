@@ -9,21 +9,22 @@ import play from "../../assets/play.svg";
 import pause from "../../assets/pause.svg";
 import forward from "../../assets/forward.svg";
 import backward from "../../assets/back.svg";
-import AuthContext from "../../store/auth-context";
 
 function MusicPlayer(props) {
   const [gotData, setGotData] = useState(false);
   const ctx = useContext(SongContext);
-  const authCtx = useContext(AuthContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     async function getSongs() {
       try {
-        const allSongs = await axios.get("http://localhost:5000/songs", {
-          withCredentials: true,
-        });
+        const allSongs = await axios.get(
+          "https://music-player-2022.herokuapp.com/songs",
+          {
+            withCredentials: true,
+          }
+        );
         ctx.changeSongList(allSongs.data);
         setGotData(true);
       } catch {
@@ -37,17 +38,14 @@ function MusicPlayer(props) {
     } else if (ctx.songList[0].song) {
       setGotData(true);
     }
-  }, []);
+  }, [ctx]);
 
   // update song src on a different song
   if (
     ctx.songList[0] !== undefined &&
-    ctx.song.src !==
-      `http://localhost:5000/${ctx.songList[props.currentSong].song}`
+    ctx.song.src !== ctx.songList[props.currentSong].song
   ) {
-    ctx.song.src = `http://localhost:5000/${
-      ctx.songList[props.currentSong].song
-    }`;
+    ctx.song.src = ctx.songList[props.currentSong].song;
   }
 
   if (isPlaying) {
@@ -101,16 +99,12 @@ function MusicPlayer(props) {
               <motion.img
                 animate="spin"
                 variants={imageSpin}
-                src={`http://localhost:5000/${
-                  ctx.songList[props.currentSong].cover
-                }`}
+                src={ctx.songList[props.currentSong].cover}
                 alt="song cover"
               />
             ) : (
               <img
-                src={`http://localhost:5000/${
-                  ctx.songList[props.currentSong].cover
-                }`}
+                src={ctx.songList[props.currentSong].cover}
                 alt="song cover"
               />
             )}

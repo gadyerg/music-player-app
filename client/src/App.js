@@ -16,10 +16,7 @@ function App() {
     <div>
       <Nav />
       <Routes>
-        <Route
-          path="*"
-          element={<NotFound />} 
-        />
+        <Route path="*" element={<NotFound />} />
         <Route
           path="/"
           element={!authCtx.isLoggedIn ? <Navigate to="/login" /> : <Home />}

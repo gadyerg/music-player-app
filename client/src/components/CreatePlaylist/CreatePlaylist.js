@@ -1,18 +1,18 @@
 import classes from "./CreatePlaylist.module.css";
 import axios from "axios";
-import { useContext } from "react";
-import AuthContext from "../../store/auth-context";
 
 function CreatePlaylist(props) {
-  const authCtx = useContext(AuthContext);
-
   async function submitHandler(evt) {
     evt.preventDefault();
     const data = { name: evt.target[0].value };
     try {
-      await axios.post(`http://localhost:5000/playlist`, data, {
-        withCredentials: true,
-      });
+      await axios.post(
+        `https://music-player-2022.herokuapp.com/playlist`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
       console.log("done");
       props.updateList();
       props.close();

@@ -39,7 +39,9 @@ function NavMenu(props) {
               <Link to="/playlists">Playlists</Link>
             </li>
             <li>
-              <button className={classes.logout} onClick={logOut}>Log Out</button>
+              <button className={classes.logout} onClick={logOut}>
+                Log Out
+              </button>
             </li>
           </React.Fragment>
         )}

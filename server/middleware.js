@@ -1,4 +1,20 @@
 const multer = require("multer");
+const cloudinary = require("cloudinary");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  secret: process.env.CLOUDINARY_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "MusicPlayerApp",
+    allowedFormats: ["jpeg", "jpg", "png", "mp3", "wav", "m4a", "flac"],
+  },
+});
 
 module.exports.checkLogIn = (req, res, next) => {
   if (req.session.user) {
@@ -7,14 +23,5 @@ module.exports.checkLogIn = (req, res, next) => {
     res.json("Not Authorized");
   }
 };
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, __dirname + "/uploads/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname.replace(/\s/g, ""));
-  },
-});
 
 module.exports.upload = multer({ storage: storage });

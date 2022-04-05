@@ -12,7 +12,7 @@ function SongPreview(props) {
 
   return (
     <div className={classes.preview} onClick={songClick}>
-      <img src={`http://localhost:5000/${props.image}`} alt="song cover" />
+      <img src={props.image} alt="song cover" />
       <p>{props.songTitle}</p>
     </div>
   );

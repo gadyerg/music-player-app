@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import classes from "./SignUpForm.module.css";
 import { useNavigate } from "react-router-dom";
@@ -6,7 +6,7 @@ import Error from "../Error/Error";
 
 function SignUpForm() {
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function submitHandler(evt) {
     evt.preventDefault();
@@ -15,7 +15,7 @@ function SignUpForm() {
       password: evt.target[1].value,
     };
     try {
-      await axios.post("http://localhost:5000/signup", data);
+      await axios.post("https://music-player-2022.herokuapp.com/signup", data);
       navigate("/login");
     } catch (err) {
       setErrorMessage(err.response.data);

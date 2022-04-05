@@ -5,16 +5,15 @@ import classes from "./Song.module.css";
 function Song(props) {
   const [inPlaylist, setInPlaylist] = useState(false);
 
-  function checkInPlaylist() {
-    const isInPlaylist = props.songList.includes(props.id);
-    if (isInPlaylist) {
-      setInPlaylist(true);
-    }
-  }
-
   useEffect(() => {
+    function checkInPlaylist() {
+      const isInPlaylist = props.songList.includes(props.id);
+      if (isInPlaylist) {
+        setInPlaylist(true);
+      }
+    }
     checkInPlaylist();
-  }, []);
+  }, [props.id, props.songList]);
 
   async function addSong() {
     const data = {
@@ -23,7 +22,7 @@ function Song(props) {
 
     try {
       await axios.patch(
-        `http://localhost:5000/playlist/${props.playlist}/addsong`,
+        `https://music-player-2022.herokuapp.com/playlist/${props.playlist}/addsong`,
         data,
         { withCredentials: true }
       );
@@ -42,7 +41,7 @@ function Song(props) {
 
     try {
       await axios.patch(
-        `http://localhost:5000/Playlist/${props.playlist}/removesong`,
+        `https://music-player-2022.herokuapp.com/playlist/${props.playlist}/removesong`,
         data,
         { withCredentials: true }
       );
@@ -56,7 +55,7 @@ function Song(props) {
 
   return (
     <div className={classes.box}>
-      <img src={`http://localhost:5000/${props.cover}`} alt="song cover" />
+      <img src={props.cover} alt="song cover" />
       <p>{props.name}</p>
       {inPlaylist ? (
         <button className={classes.remove} onClick={removeSong}>

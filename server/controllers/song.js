@@ -6,8 +6,8 @@ module.exports.uploadSong = async (req, res, next) => {
   const currentUser = await User.findById(req.session.user.id);
   const info = {
     ...req.body,
-    cover: "uploads/" + req.files.cover[0].filename,
-    song: "uploads/" + req.files.song[0].filename,
+    cover: req.files.cover[0].path,
+    song: req.files.song[0].path,
   };
   if (!req.files.cover[0].mimetype.includes("image")) {
     next(new ExpressError("Not a valid image file", 401));

@@ -21,7 +21,7 @@ function Playlist(props) {
   async function select() {
     try {
       const data = await axios.get(
-        `http://localhost:5000/playlist/${props.id}/songs`,
+        `https://music-player-2022.herokuapp.com/playlist/${props.id}/songs`,
         { withCredentials: true }
       );
       songCtx.changeSongList(data.data);
@@ -45,7 +45,7 @@ function Playlist(props) {
       )}
       <div className={classes.info}>
         <img
-          src={`http://localhost:5000/${props.thumbnail}`}
+          src={`https://music-player-2022.herokuapp.com/${props.thumbnail}`}
           alt="playlist Thumnail"
           className={classes.thumbnail}
         />

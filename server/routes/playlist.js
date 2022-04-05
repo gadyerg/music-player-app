@@ -4,9 +4,7 @@ const playlist = require("../controllers/playlist");
 const catchAsync = require("../utils/catchAsync");
 const { checkLogIn } = require("../middleware");
 
-router.route("/")
-  .post(playlist.createPlaylist)
-  .get(playlist.getPlaylists);
+router.route("/").post(playlist.createPlaylist).get(playlist.getPlaylists);
 
 router.get("/:id/songs", checkLogIn, catchAsync(playlist.getPlaylistSongs));
 

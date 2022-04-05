@@ -14,9 +14,12 @@ export function AuthProvider(props) {
 
   useEffect(() => {
     async function checkAuth() {
-      const authCheck = await axios.get("https://music-player-2022.herokuapp.com/AuthCheck", {
-        withCredentials: true,
-      });
+      const authCheck = await axios.get(
+        "https://music-player-2022.herokuapp.com/AuthCheck",
+        {
+          withCredentials: true,
+        }
+      );
       if (authCheck.data.id) {
         setUser(authCheck.data);
         setIsLoggedIn(true);
@@ -32,7 +35,9 @@ export function AuthProvider(props) {
   }
 
   async function logoutHandler() {
-    await axios.get("http://localhost:5000/signout", { withCredentials: true });
+    await axios.get("https://music-player-2022.herokuapp.com/signout", {
+      withCredentials: true,
+    });
     setIsLoggedIn(false);
   }
 

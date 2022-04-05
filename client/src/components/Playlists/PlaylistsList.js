@@ -1,21 +1,22 @@
 import Playlist from "./Playlist.js";
 import CreatePlaylist from "../CreatePlaylist/CreatePlaylist";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import classes from "./PlaylistsList.module.css";
-import AuthContext from "../../store/auth-context";
 
 function PlaylistsList() {
   const [popup, setPopup] = useState(false);
   const [listOfPlaylists, setListOfPlaylists] = useState([]);
-  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     async function getPlaylists() {
       try {
-        const playlistData = await axios.get("http://localhost:5000/playlist", {
-          withCredentials: true,
-        });
+        const playlistData = await axios.get(
+          "https://music-player-2022.herokuapp.com/playlist",
+          {
+            withCredentials: true,
+          }
+        );
         setListOfPlaylists(playlistData.data);
       } catch (err) {
         console.log(err);
@@ -34,9 +35,12 @@ function PlaylistsList() {
   }
 
   async function updatePlaylistList() {
-    const updatedData = await axios.get("http://localhost:5000/playlist", {
-      withCredentials: true,
-    });
+    const updatedData = await axios.get(
+      "https://music-player-2022.herokuapp.com/playlist",
+      {
+        withCredentials: true,
+      }
+    );
     setListOfPlaylists(updatedData.data);
   }
 

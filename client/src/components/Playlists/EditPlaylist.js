@@ -1,18 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./EditPlaylist.module.css";
 import Song from "./Song";
 import axios from "axios";
-import AuthContext from "../../store/auth-context";
 
 function EditPlaylist(props) {
   const [songs, setSongs] = useState([{}]);
-  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
     async function getSongData() {
-      const songData = await axios.get(`http://localhost:5000/songs`, {
-        withCredentials: true,
-      });
+      const songData = await axios.get(
+        `https://music-player-2022.herokuapp.com/songs`,
+        {
+          withCredentials: true,
+        }
+      );
       setSongs(songData.data);
     }
 
@@ -21,9 +22,12 @@ function EditPlaylist(props) {
 
   async function deletePlaylist() {
     try {
-      await axios.delete(`http://localhost:5000/playlist/${props.id}`, {
-        withCredentials: true,
-      });
+      await axios.delete(
+        `https://music-player-2022.herokuapp.com/playlist/${props.id}`,
+        {
+          withCredentials: true,
+        }
+      );
       props.close();
       props.update();
     } catch (err) {
@@ -35,7 +39,7 @@ function EditPlaylist(props) {
     <div className={classes.background}>
       <div className={classes.card}>
         <img
-          src={`http://localhost:5000/${props.thumbnail}`}
+          src={props.thumbnail}
           alt="Playlist cover"
           className={classes.thumbnail}
         />

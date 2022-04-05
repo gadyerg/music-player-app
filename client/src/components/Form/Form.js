@@ -25,7 +25,11 @@ function Form() {
     data.append("id", localStorage.getItem("id"));
 
     try {
-      await axios.post("http://localhost:5000/songs", data, config);
+      await axios.post(
+        "https://music-player-2022.herokuapp.com/songs",
+        data,
+        config
+      );
       navigate("/");
     } catch {
       setError(true);
@@ -64,7 +68,7 @@ function Form() {
             id="cover"
             onChange={onImageChange}
           />
-          <img src={image} />
+          <img src={image} alt="song cover" />
           <label htmlFor="song" className={classes.filelabel}>
             Song Upload
           </label>

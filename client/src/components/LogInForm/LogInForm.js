@@ -17,9 +17,13 @@ function LogInForm() {
       password: evt.target[1].value,
     };
     try {
-      const match = await axios.post("http://localhost:5000/login", data, {
-        withCredentials: true,
-      });
+      const match = await axios.post(
+        "https://music-player-2022.herokuapp.com/login",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
       if (match.data.id) {
         authCtx.onLogIn(match.data);
         navigate("/");

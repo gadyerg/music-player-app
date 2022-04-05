@@ -7,8 +7,7 @@ module.exports.signUp = async (req, res, next) => {
   const isTaken = await User.find({ username: req.body.username });
   if (isTaken.length === 1) {
     next(new ExpressError("Username is already taken", 401));
-  }
-  else {
+  } else {
     const encryptedPassword = await bcrypt.hash(req.body.password, 12);
     const newUser = await new User({
       username: req.body.username,
