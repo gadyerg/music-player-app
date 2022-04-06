@@ -55,8 +55,6 @@ app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/default", express.static(__dirname + "/default"));
 
 app.use(helmet({
-  crossOriginEmbedderPolicy: false,
-  crossOriginOpenerPolicy: false,
   crossOriginResourcePolicy: false,
 }));
 app.use(helmet.contentSecurityPolicy({
