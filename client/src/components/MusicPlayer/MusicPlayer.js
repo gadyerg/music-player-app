@@ -19,7 +19,6 @@ function MusicPlayer(props) {
   useEffect(() => {
     async function getSongs() {
       try {
-        console.log(image);
         const allSongs = await axios.get(
           "https://music-player-2022.herokuapp.com/songs",
           {
