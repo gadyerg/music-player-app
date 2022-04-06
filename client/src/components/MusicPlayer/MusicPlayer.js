@@ -9,12 +9,16 @@ import play from "../../assets/play.svg";
 import pause from "../../assets/pause.svg";
 import forward from "../../assets/forward.svg";
 import backward from "../../assets/back.svg";
+import axios from "axios";
 
 function MusicPlayer(props) {
   const [gotData, setGotData] = useState(false);
   const ctx = useContext(SongContext);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState(false);
+
+  const image = axios.get(ctx.songList[props.currentSong].cover)
+  console.log(image);
 
   useEffect(() => {
     async function getSongs() {

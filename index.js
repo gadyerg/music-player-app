@@ -13,6 +13,7 @@ const helmet = require("helmet");
 const MongoStore = require("connect-mongo");
 const mongoSanitize = require("express-mongo-sanitize");
 const path = require("path");
+const cors = require("cors");
 
 const port = process.env.PORT || 5000;
 const secret = process.env.SECRET || "secret";
@@ -48,7 +49,7 @@ app.use(mongoSanitize());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/default", express.static(__dirname + "/default"));
 
-app.use(helmet({ contetnSecurityPolicy: false }));
+app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
   directives: {
     defaultSrc: [],
