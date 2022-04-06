@@ -16,12 +16,10 @@ function MusicPlayer(props) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState(false);
 
-  const image = axios.get(ctx.songList[props.currentSong].cover)
-  console.log(image);
-
   useEffect(() => {
     async function getSongs() {
       try {
+        console.log(image);
         const allSongs = await axios.get(
           "https://music-player-2022.herokuapp.com/songs",
           {
