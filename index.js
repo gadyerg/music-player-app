@@ -54,33 +54,6 @@ app.use(cors({
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/default", express.static(__dirname + "/default"));
 
-app.use(helmet({referrerPolicy: "strict-origin-when-cross-origin"}));
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    defaultSrc: [],
-    connectSrc: ["'self'", "https://res.cloudinary.com/dxase4lua/"],
-    scriptSrc: ["'unsafe-inline'", "'self'"],
-    styleSrc: [
-      "'unsafe-inline'",
-      "'self'",
-      "https://fonts.googleapis.com/",
-    ],
-    workerSrc: ["'self'", "blob:"],
-    objectSrc: [],
-    imgSrc: [
-      "'self'",
-      "blob:",
-      "data:",
-      "https://res.cloudinary.com/dxase4lua/",
-    ],
-    mediaSrc: [
-      "'self'",
-      "blob:",
-      "data:",
-      "https://res.cloudinary.com/dxase4lua/",
-    ],
-  }
-}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
