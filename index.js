@@ -38,7 +38,7 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 365,
       httpOnly: true,
-      sameSite: true,
+      sameSite: false,
       secure: true,
     },
   })
@@ -46,7 +46,7 @@ app.use(
 
 app.use(mongoSanitize());
 app.use(cors({
-  origin: "*",
+  origin: "https://res.cloudinary.com",
   methods: ["GET"],
   credentials: true,
 }))
