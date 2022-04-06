@@ -9,7 +9,6 @@ import play from "../../assets/play.svg";
 import pause from "../../assets/pause.svg";
 import forward from "../../assets/forward.svg";
 import backward from "../../assets/back.svg";
-import axios from "axios";
 
 function MusicPlayer(props) {
   const [gotData, setGotData] = useState(false);
