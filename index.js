@@ -45,6 +45,11 @@ app.use(
 );
 
 app.use(mongoSanitize());
+app.use(cors({
+  origin: "*",
+  methods: ["GET"],
+  credentials: true,
+}))
 
 app.use("/uploads", express.static(__dirname + "/uploads"));
 app.use("/default", express.static(__dirname + "/default"));
